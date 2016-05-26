@@ -1,0 +1,81 @@
+﻿Value converters are used in WPF on DataBiding if source object type is diffrent form target property type.
+<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:x-large;padding:3px;">&nbsp;<u>Value Converters</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        We have two interface to implement value converters in WPF:
+        <ol>
+            <li><b>IValueConverter:</b> to bind single property from source.</li>
+            <li><b>IMultiValueConverter:</b> to bind multiple values from source.</li>
+        </ol>
+        Both interfaces consist of two methods:
+        <b>Convert</b> method get called when <strong>source updates target</strong>.
+        <b>ConvertBack</b> method gets called when <strong>target updates source</strong>.
+        <details>
+            <summary><span style="font-weight:bold;padding:3px;margin:5px;">&nbsp;<u>IValueConverter</u>&nbsp;&nbsp;&nbsp;</span></summary>
+            <div style="border:1px solid lightblue;padding:5px;">
+                First we need to implement IValueConverter interface:
+                <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+                    public class BoolToVisibilityConverter : IValueConverter
+                    {
+                    &nbsp;&nbsp;&nbsp;&nbsp;public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+                    &nbsp;&nbsp;&nbsp;&nbsp;{
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Visibility visibility = Visibility.Visible;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(value is bool && (bool)value == false)
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;visibility = Visibility.Hidden;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return visibility;
+                    &nbsp;&nbsp;&nbsp;&nbsp;}
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;public object ConvertBack...
+                    }
+                </div>
+                To bind value on WPF control:
+                <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+                    &lt;Window...
+                    &nbsp;&nbsp;&nbsp;&nbsp;xmlns:local="clr-namespace:WpfValueConverters"...
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;Window.Resources&gt;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>&lt;local:BoolToVisibilityConverter x:Key="boolToVisibilityConverter"</b>...
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;/Window.Resources&gt;
+
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;Grid...
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;CheckBox IsChecked="{Binding ShowImage}"...
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Image <b>Visibility="{Binding ShowImage, Converter={StaticResource boolToVisibilityConverter}}"</b>...
+                </div>
+            </div>
+        </details>
+        <details>
+            <summary><span style="font-weight:bold;padding:3px;margin:5px;">&nbsp;<u>IMultiValueConverter</u>&nbsp;&nbsp;&nbsp;</span></summary>
+            <div style="border:1px solid lightblue;padding:5px;">
+                Again first we need to implement IMultiValueConverter interface:
+                <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+                    public class NameMultiValueConverter : IMultiValueConverter
+                    {
+                    &nbsp;&nbsp;&nbsp;&nbsp;public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+                    &nbsp;&nbsp;&nbsp;&nbsp;{
+                    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;StringBuilder result = new StringBuilder();
+                    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;foreach (object obj in values)
+                    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;result.Append(obj.ToString() + " ");
+                    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;return result.ToString();
+                    &nbsp;&nbsp;&nbsp;&nbsp;}
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;public object[] ConvertBack...
+                    }
+                </div>
+                Bind value on WPF control:
+                <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+                    &lt;TextBlock Grid.Row="3" Grid.Column="1" VerticalAlignment="Center"&gt;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;TextBlock.Text&gt;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;MultiBinding Converter="{StaticResource nameMultiValueConverter}"&gt;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Binding Path="FirstName" /&gt;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Binding Path="LastName" /&gt;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/MultiBinding&gt;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;/TextBlock.Text&gt;
+                    &lt;/TextBlock&gt;
+                </div>
+            </div>
+        </details>
+        Visit: <a href="https://github.com/adsharmawp/Wpf-Value-Converters">Full Example</a>
+    </div>
+</details>
+<i><span style="float:right;font-weight:bold;color:#0066CC;">- Akash Deep Sharma</span></i>

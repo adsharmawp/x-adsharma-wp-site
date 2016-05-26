@@ -1,0 +1,107 @@
+﻿Now we already know that JavaScript function can be used as Classes, time to explore more...
+<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:x-large;padding:3px;">&nbsp;<u>Public and Private Member</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        By using 'this' keyword inside the function you can create public member and by using 'var' keyword you can create private member. If you need you can create readonly or writeonly properties as well.
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            function Student(name) {
+            // public member
+            &nbsp;&nbsp;&nbsp;&nbsp;this.Name = name;
+            // private member
+            &nbsp;&nbsp;&nbsp;&nbsp;var _subject = "CSharp";
+            // readonly member
+            &nbsp;&nbsp;&nbsp;&nbsp;Object.defineProperty(this, "Subject", {
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get: function () { return _subject; }
+            &nbsp;&nbsp;&nbsp;&nbsp;});
+            }
+            var s = new Student("xyz");
+            document.write(s.Name);
+            document.write(s.Subject);
+        </div>
+        In the same way you can create a set method for write or writeonly.
+    </div>
+</details>
+<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:x-large;padding:3px;">&nbsp;<u>Static Member</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        We can define static member on a class (function in JavaScript) by using class name and assigning value directly on class name:
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            function Student(...) { ... }
+            Student.College = "SD College"; // Static Member
+            document.write(Student.College); // SD College
+        </div>
+    </div>
+</details>
+<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:x-large;padding:3px;">&nbsp;<u>Prototype</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        JavaScript also called a prototype language because every object as prototype object association.<br />
+        If you define static function member on a class (as we used for variable on above example) we can not access the instance member.<br />
+        But suppose we need a additional functionality that should object based we can provide protoype members (it has access to prive members of objects)<br />
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            Student.prototype.PrintName =  function() {
+            &nbsp;&nbsp;&nbsp;&nbsp;document.write(this.Name);
+            }
+            var s = new Student("abc");
+            s.PrintName(); // Output: abc
+        </div>
+        You can also use this to create inheritance to achieve is-a relationship.
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            // Animal Class
+            function Animal(foodType) {
+            &nbsp;&nbsp;&nbsp;&nbsp;this.foodType = foodType;
+            &nbsp;&nbsp;&nbsp;&nbsp;this.feed = function () {
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert("Fed the animal with " + foodType);
+            &nbsp;&nbsp;&nbsp;&nbsp;}
+            }
+            // Use
+            var a = new Animal("None");
+            a.feed(); // None
+            document.write(a instanceof Animal); // true;
+            // Cow Class
+            function Cow(color) {
+            &nbsp;&nbsp;&nbsp;&nbsp;this.color = color;
+            }
+            // Chaining : When ever new Cow getting create create Animal with 'Hay'
+            <b>Cow.prototype = new Animal("Hay");</b>
+            // Use
+            var c = new Cow("White");
+            c.feed(); // Hey
+            document.write(c instanceof Animal); // true
+        </div>
+    </div>
+</details>
+<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:x-large;padding:3px;">&nbsp;<u>Interfaces and Reflection</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        Interfaces are not supported in JavaScript. As JavaScript is a 'Duck Typing' language and if we have properties and method on the object that why we bother about the type?
+        But passed object doesn't have that property, can I check before use?
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            if (student.hasOwnProperty("name"))
+            &nbsp;&nbsp;&nbsp;&nbsp;document.write(student["name"]);
+            else
+            &nbsp;&nbsp;&nbsp;&nbsp;document.write(student.fullName());
+        </div>
+        You can also use <b>propertyIsEnumerable</b> to check if you can enumerate on that or not.<br>
+        And to go through all the properties and functions available on an object:
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            var student = {
+            &nbsp;&nbsp;&nbsp;&nbsp;fname: "akash",
+            &nbsp;&nbsp;&nbsp;&nbsp;lname: "sharma",
+            &nbsp;&nbsp;&nbsp;&nbsp;subject: "JavaScript",
+            &nbsp;&nbsp;&nbsp;&nbsp;fullName: function () {
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return this.fname + " " + this.lname;
+            &nbsp;&nbsp;&nbsp;&nbsp;}
+            }
+
+            for(var prop in student)
+            {
+            &nbsp;&nbsp;&nbsp;&nbsp;if (typeof student[prop] == 'function')
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.writeln(student[prop]()); // akash sharma by function call
+            &nbsp;&nbsp;&nbsp;&nbsp;else
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.writeln(student[prop]); // akash sharma JavaScript
+            }
+        </div>
+    </div>
+</details>
+<i><span style="float:right;font-weight:bold;color:#0066CC;">- Akash Deep Sharma</span></i>

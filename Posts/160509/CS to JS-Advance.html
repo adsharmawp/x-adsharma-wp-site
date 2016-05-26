@@ -1,0 +1,210 @@
+﻿<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:x-large;padding:3px;">&nbsp;<u>Use Strict Mode</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        As JavaScript is loosely type language and some time it may cause unexpected error if you do things not carefully (and error is going to be runtime definitely). So some strictness can help you to prevent these error.
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            // AnyJavaScriptFile.js<br />
+            'use strict';
+        </div>
+        File started with above line give you console error when:
+        <ul>
+            <li>try to use a variable that is not defined</li>
+            <li>try to create another variable name which already used</li>
+            <li>writing to read-only property which otherwise silently fails</li>
+            <li>modify 'arguments' object inside a function</li>
+        </ul>
+    </div>
+</details>
+<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:x-large;padding:3px;">&nbsp;<u>Default Values</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        If you are expecting forom an object (passed in to your function) to have some property, and in case property is not provided you may want to use your default value insted. So you need some machanism to validated weather property is there or not you can use '<b>hasOwnProperty</b>' method:
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            if(!msg.hasOwnProperty("to"))<br />
+            {<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;msg.to = "ad.sharma@hotmail.com";<br />
+            }<br />
+            // or in jQuery<br />
+            var defaults = { to: "ad.sharma@hotmail.com",  ...} // your default object<br />
+            $.extend(defaults, msg); // for missing props use defaults
+        </div>
+    </div>
+</details>
+<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:x-large;padding:3px;">&nbsp;<u>Events and Asynchronous Functionality</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        <b>Call Backs:</b> If you pass a function to another function as a parameter, within the function you can call it when you are finished with your job.<br />
+        It is easy to build callback hells or spaghetti code with them if not used properly.
+    </div>
+</details>
+<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:x-large;padding:3px;">&nbsp;<u>Packaging</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        In C# after putting things in namespaces we finally create an assembly (dll) so that other can use our functionality. In JavaScript package is file based.<br />
+        <br />
+        In JavaScript if you have lot of files and you want to deliver them there are 2 options:<br />
+        1. Build for Coexistence (give everything on one page without collision)<br />
+        2. Require.js (for lazy loading.. bundled will downloaded as they are needed)<br />
+        <br />
+        Now lets take an example:
+        We have 3 .js files: main.js, order.js and customer.js
+
+        <details>
+            <summary><span style="font-weight:bold;padding:3px;margin:5px;">&nbsp;<u>Plain Implementation</u>&nbsp;&nbsp;&nbsp;</span></summary>
+            <div style="border:1px solid lightblue;padding:5px;">
+                <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+                    // main.js
+                    var o = new Order(1, "akash");
+                    document.writeln(o.id);
+                    document.writeln(o.customer.name);
+                </div>
+                <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+                    // order.js
+                    function Order(id, custName) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;this.id = id;
+                    &nbsp;&nbsp;&nbsp;&nbsp;this.customer = new Customer(custName);
+                    }
+                </div>
+                <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+                    // customer.js
+                    function Customer(name) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;this.name = name;
+                    }
+                </div>
+                <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+                    // put files in right sequence...
+                    script src="customer.js"...
+                    script src="order.js"...
+                    script src="main.js"...
+                </div>
+                In HTML file while including script files sequece is very important as main depends on Order and Order depends on Customer. So first we need to load Customer then Order then Main.<br />
+                Can we do something so that sequence can be order free? Yes in next example we will start execution of code once all script files get load first.
+            </div>
+        </details>
+        <details>
+            <summary><span style="font-weight:bold;padding:3px;margin:5px;">&nbsp;<u>On Document Ready</u>&nbsp;&nbsp;&nbsp;</span></summary>
+            <div style="border:1px solid lightblue;padding:5px;">
+                First lets change code style of Order and Customer first. Insted of giving name to function directly we will use variable (delegate with anonymous function) to function.
+                <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+                    // order.js
+                    Order = function (id, custName) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;this.id = id;
+                    &nbsp;&nbsp;&nbsp;&nbsp;this.customer = new Customer(custName);
+                    }
+                </div>
+                <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+                    // customer.js
+                    Customer = function (name) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;this.name = name;
+                    }
+                </div>
+                Now in Main.js we can write code in such a way that it will execute once all files are loaded:
+                <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+                    document.addEventListener("DOMContentLoaded", function () {
+                    &nbsp;&nbsp;&nbsp;&nbsp;var o = new Order(1, "akash");
+                    &nbsp;&nbsp;&nbsp;&nbsp;document.writeln(o.id);
+                    &nbsp;&nbsp;&nbsp;&nbsp;document.writeln(o.customer.name);
+                    });
+
+                    // or in jQuery
+                    $(document).ready(function () {
+                    &nbsp;&nbsp;&nbsp;&nbsp;var o = new Order(1, "akash");
+                    &nbsp;&nbsp;&nbsp;&nbsp;document.writeln(o.id);
+                    &nbsp;&nbsp;&nbsp;&nbsp;document.writeln(o.customer.name);
+                    });
+                </div>
+            </div>
+        </details>
+        <details>
+            <summary><span style="font-weight:bold;padding:3px;margin:5px;">&nbsp;<u>Namespacing</u>&nbsp;&nbsp;&nbsp;</span></summary>
+            <div style="border:1px solid lightblue;padding:5px;">
+                Now what about namespace? we are declaring everything on global scope? Let's use IIFI and 'myExample' as an example.
+                <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+                    // order.js
+                    (function (ns) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;ns.Order = function (id, custName) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.id = id;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.customer = new ns.Customer(custName);
+                    &nbsp;&nbsp;&nbsp;&nbsp;}
+                    }(window.myExample = window.myExample || {}));
+                </div>
+                <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+                    // customer.js
+                    (function (ns) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;ns.Customer = function (name) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.name = name;
+                    &nbsp;&nbsp;&nbsp;&nbsp;}
+                    }(window.myExample = window.myExample || {}));
+                </div>
+                <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+                    // Updated main.js
+                    $(document).ready(function () {
+                    &nbsp;&nbsp;&nbsp;&nbsp;var o = new myExample.Order(1, "akash");
+                    &nbsp;&nbsp;&nbsp;&nbsp;document.writeln(o.id);
+                    &nbsp;&nbsp;&nbsp;&nbsp;document.writeln(o.customer.name);
+                    });
+                </div>
+            </div>
+        </details>
+    </div>
+</details>
+<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:x-large;padding:3px;">&nbsp;<u>Packaging with Require.js</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        You can download require.js from http://requirejs.org/ this is based on Asynchronous Module Definition (AMD) pattern. It is like Dependency Injection in JavaScript and load script when they are required instead of all in once.
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            //index.html
+            script src="require.js" data-main="main.js"<br><hr>
+            //main.js<br>
+            require(["order"], function (Order) {
+            &nbsp;&nbsp;&nbsp;&nbsp;var o = new Order(1, "akash");
+            &nbsp;&nbsp;&nbsp;&nbsp;document.writeln(o.id);
+            &nbsp;&nbsp;&nbsp;&nbsp;document.writeln(o.customer.name);
+            });
+        </div>
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            // order.js
+            define(["customer"],
+            &nbsp;&nbsp;&nbsp;&nbsp;function (Customer) {
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function Order(id, custName) {
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.id = id;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.customer = new Customer(custName);
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return Order;
+            &nbsp;&nbsp;&nbsp;&nbsp;}
+            );
+        </div>
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            // Customer.js
+            define([],
+            &nbsp;&nbsp;&nbsp;&nbsp;function () {
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function Customer (name) {
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.name = name;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return Customer;
+            &nbsp;&nbsp;&nbsp;&nbsp;}
+            );
+        </div>
+        First of all in html you need to define <b>data-main</b> with your main javascript file.
+        Require method you need to provide all the dependencies in array and that is mapped to JavaScript file and second parameter is function takes input returned from the instantiation (or function pointer) of that file as API.
+        Define return the function pointer as API.
+    </div>
+</details>
+<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:x-large;padding:3px;">&nbsp;<u>Compiling JavaScript</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        JavaScript is Interpreted...So what about compilation???
+        AS compilation perform two tasks in C#:
+        <ol>
+            <li>Check for all the syntax</li>
+            <li>Create IL code</li>
+        </ol>
+        Now same kind of concept is with JavaScript:
+        <ol>
+            <li>JSLint to check for correctness</li>
+            <li>Minification for Packaging</li>
+        </ol>
+        ASP.NET 4 supports Packaging (Minification) and JSLint is available as VS add-in. (jslint4vs2010.codeplex.com)
+    </div>
+</details>
+<i><span style="float:right;font-weight:bold;color:#0066CC;">- Akash Deep Sharma</span></i>

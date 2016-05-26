@@ -1,0 +1,126 @@
+﻿JavaScript functions look like C# function, but they are not exact same
+In JavaScript function are like C# methods and C# classes both and depend on the context.
+<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:x-large;padding:3px;">&nbsp;<u>JavaScript Function Vs C# method</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        Let's have an example:
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            // defining function
+            &nbsp;&nbsp;&nbsp;&nbsp;function foo(args1, args2) {
+            }
+
+            // calling function
+            foo(1,2);
+        </div>
+        It looks same as C#; but in JavaScript you can call same method with no or less argument or with greater number of arguments:
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            foo();
+            foo(1);
+            foo(1,2,3);
+        </div>
+        So, what's going here?
+        Function in JavaScript are not differentiate by argument type or list. This also mean we can nor overload a method.
+        If you define 2 same name method with diffrent argument then 2nd definition interpreted will take place in memory and 1st will be vanish.
+        <b>So why arguments?</b> - for easy access of your variables;
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            function foo(a, b, c){
+            &nbsp;&nbsp;&nbsp;&nbsp;document.write(a);
+            &nbsp;&nbsp;&nbsp;&nbsp;document.write(b);
+            &nbsp;&nbsp;&nbsp;&nbsp;document.write(c);
+            }
+            foo(1,2,3); // Output: 1,2,3
+            foo(1,2); // Output: 1,2,undefined
+            foo(1,2,3,4); // Output: 1,2,3 (But wait where is 4?)
+        </div>
+        How to stop printing 'undefined'?
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            function foo(a, b, c){
+            &nbsp;&nbsp;&nbsp;&nbsp;<b>if(a)</b> document.write(a);
+            &nbsp;&nbsp;&nbsp;&nbsp;<b>if(b)</b> document.write(b);
+            &nbsp;&nbsp;&nbsp;&nbsp;<b>if(c)</b> document.write(c);
+            }
+        </div>
+        How to know about arguments?
+        <b>argument object:</b> there is a argument object available inside functions only:
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            function foo(a,b,c){
+            &nbsp;&nbsp;&nbsp;&nbsp;document.write(arguments.length);
+            }
+            foo(1,2,3);   // Output: "3"
+            foo(1,2);     // Output: "2"
+            foo(1,2,3,4); // Output: "4"
+        </div>
+        Accessing all arguments in JavaScript:
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            function foo(){
+            &nbsp;&nbsp;&nbsp;&nbsp;for (var i = 0; i < arguments.length; i++)
+            &nbsp;&nbsp;&nbsp;&nbsp;document.write(arguments[i]);
+            }
+
+            foo(6,7,8); // Output: 6,7,8
+        </div>
+        foreach style; but gives index insted of actual object;
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            function foo(){
+            &nbsp;&nbsp;&nbsp;&nbsp;for (var arg in arguments)
+            &nbsp;&nbsp;&nbsp;&nbsp;document.write(arg);  // Output: 0,1,3
+            &nbsp;&nbsp;&nbsp;&nbsp;document.write(arguments[arg]);  // Output: 6,7,8
+            }
+            foo(6,7,8);
+        </div>
+    </div>
+</details>
+<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:x-large;padding:3px;">&nbsp;<u>JavaScript Function like Object</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        JavaScript function can behave like any other object.
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            function foo(a,b,c){ alert('hi'); }
+
+            document.write(foo.length); // Output: 3 [based on parameters]
+
+            document.write(foo.toString()); // Output: whole definition of function.
+        </div>
+        So you define a function and assign it to an object same like ‘anonymous delegate’ in C#
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            var foo = function (a,b,c){ alert('hi'); }
+
+            var l = foo.length; // 3 : same like above properties
+            foo(1,2,3); // Calling
+        </div>
+    </div>
+</details>
+<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:x-large;padding:3px;">&nbsp;<u>JavaScript Function like Class</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        JavaScript function can be used as Class:
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            function Student(fname, lname) {
+            &nbsp;&nbsp;&nbsp;&nbsp;this.firstName = fname;
+            &nbsp;&nbsp;&nbsp;&nbsp;this.lastName = lname;
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;this.FullName = function () {
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.write(this.firstName + " " + this.lastName);
+            &nbsp;&nbsp;&nbsp;&nbsp;}
+            }
+            var s = new Student("akash", "sharma");
+            s.FullName();
+        </div>
+        If we use var instead of this the variable will be treated as private member of the class. 'this' represent the instance of the class or in other words 'owner'.
+        However scope is different (engine need to know the scope so that variable can be collected by GC). So in JavaScript scope of a variable is based on function and not on { }.
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            var obj = {
+            &nbsp;&nbsp;&nbsp;&nbsp;name: "rohit",
+            &nbsp;&nbsp;&nbsp;&nbsp;myFunc1: function () {
+            &nbsp;&nbsp;&nbsp;&nbsp;if (true) {
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var age = "28";
+            &nbsp;&nbsp;&nbsp;&nbsp;}
+            &nbsp;&nbsp;&nbsp;&nbsp;document.write(this.name);
+            &nbsp;&nbsp;&nbsp;&nbsp;document.write(age);
+            &nbsp;&nbsp;&nbsp;&nbsp;}
+            }
+            obj.myFunc1(); // Output: rohit28
+        </div>
+    </div>
+</details>
+<i><span style="float:right;font-weight:bold;color:#0066CC;">- Akash Deep Sharma</span></i>

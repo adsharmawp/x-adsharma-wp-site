@@ -1,0 +1,237 @@
+﻿So let's discuss some of the basic difference between C# and JavaScript (ECMAScript5).
+<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:x-large;padding:3px;">&nbsp;<u>Run-time Environment</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        <strong>.NET Runtime</strong>
+        .NET runs under CLR (Common Language Run-time) that provides set of services like: Memory Management, JIT, Type System etc.
+
+        <strong>JavaScript Engine</strong>
+        JavaScript runs under JavaScript Engine (<b>V8</b> in Chrome, <b>Chakra</b> in IE, <b>Monkey</b> in Firefox) provides similar services like: Memory Management, JIT (for most part), Type System etc.<br />
+    </div>
+</details>
+<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:x-large;padding:3px;">&nbsp;<u>Language Comparison</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        <table>
+            <thead>
+                <tr>
+                    <th><b><u>C#</u></b></th>
+                    <th><b><u>JavaScript</u></b></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <ul>
+                            <li>Strong-Typed</li>
+                            <li>Static</li>
+                            <li>Classical Inheritance</li>
+                            <li>Classes</li>
+                            <li>Constructors</li>
+                            <li>Methods</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            <li>Loosely-Typed</li>
+                            <li>Dynamic</li>
+                            <li>Prototypal</li>
+                            <li>Functions</li>
+                            <li>Functions</li>
+                            <li>Functions</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        However C# supports dynamic (in new versions) but mostly it is still static type. In JavaScript identity of object are less important than shape. With JavaScript's functions we can achieve almost same mechanism like C# Classes, Constructor and Method.
+    </div>
+</details>
+<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:x-large;padding:3px;">&nbsp;<u>Strong Vs Loose Typinge</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        <table>
+            <thead>
+                <tr>
+                    <th><b><u>C#</u></b></th>
+                    <th><b><u>JavaScript</u></b></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+                            var customer = new Customer();
+                        </div>
+                        In C# compiler Inferred the type of the variable and can not be assigned to different type after that. Compiler produces an error if you try to so.
+                    </td>
+                    <td>
+                        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+                            var customer = new Customer();
+                        </div>
+                        In JavaScript we don't have strong typing so we can assign it to any type time later. In JavaScript we don't have compile time error and if anything goes wrong it will break on run time only.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Strong Typing and OOP: </b> Inheritance and implementation are part of type identity.
+                    </td>
+                    <td>
+                        <b>Loose Typing and OOP: </b> Type is less important, but the shape is important. This is what they call <b>Classic Duck Typing</b>.<br />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <b>Duck Typing: </b><i>If it walks like a duck, quack like a duck and smells like a duck... It's a Duck. We don't need identity of duck to proof and characteristics are sufficient.</i>
+    </div>
+</details>
+<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:x-large;padding:3px;">&nbsp;<u>Dynamic Typing</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        Dynamic typing is very powerful. And as we know that <b>"with great power comes great responsibility"</b>.<br>
+        The idea is that in JavaScript we can add parts of implementation whenever we need it.<br>
+        Example: We have a object (like anonymous object in C#) with two properties name and city.
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            // JavaScript
+            var customer = {
+            &nbsp;&nbsp;name: "Akash",
+            &nbsp;&nbsp;city: "Noida"
+            };
+            customer.address = "219-C, GGV";
+        </div>
+        We can add a new property any time we want. As the shape of the type is dynamic so we can change it any time we need. We can add function members also...
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            customer.dropMail = function(body) {
+            &nbsp;&nbsp;dropNewMail(this.address, body);
+            }
+        </div>
+    </div>
+</details>
+<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:x-large;padding:3px;">&nbsp;<u>Language Basics</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        <details>
+            <summary><span style="font-weight:bold;padding:3px;margin:5px;">&nbsp;<u>Global Scope</u>&nbsp;&nbsp;&nbsp;</span></summary>
+            <div style="border:1px solid lightblue;padding:5px;">
+                In C# all the code take place inside the class. We have properties and method in a class and execution starts with <b>Main</b> function.<br><br>
+                JavaScript interpreted so all your code take place in the root of the file or we can say in global scope. So we can define a variable... define a function... and make call to that function... all in one place.
+                <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+                    // JavaScript
+                    var x = 1;
+
+                    function myFunction(arg1, arg2) {
+                    &nbsp;&nbsp;//...
+                    }
+
+                    myFunction(1,x);
+                </div>
+            </div>
+        </details>
+        <details>
+            <summary><span style="font-weight:bold;padding:3px;margin:5px;">&nbsp;<u>Type Coalescing</u>&nbsp;&nbsp;&nbsp;</span></summary>
+            <div style="border:1px solid lightblue;padding:5px;">
+                Type Coalescing: mix together different elements to form one;<br />
+                In C# when joining two different types object we need to define typecasting (implicitly or explicitly), but JavaScript wants to coalesce values by default.
+                For example in C# if we want to add one string and one integer we need to convert that integer first into string.
+                <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+                    // C#
+                    "akash " + "sharma"; // result = "akash sharma"
+
+                    "akash " + 219.ToString; // have to call ToString method to convert in string first.
+                    //OR you can call String.Concat("akash ", 219) to force coalescing automatically.
+                </div>
+                Where as in C# you either have to convert the value or have to force in some way to automatically coalesce value for you, but in JavaScript it is a default behavior. If JavaScript finds operation between two different type, it convert one value (logically).
+                <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+                    // JavaScript
+                    "akash " + "sharma"; // result = "akash sharma"
+
+                    "akash " + 219; // result = "akash 219"... without casting
+
+                    // same with other types as well
+                    "akash " + true; // result = "akash true"
+                </div>
+                <b>Problem area for C# programmers is when comparing two types...</b> JavaScript do comparison with coalescing... So we get <b>Identically Equality Operators (===, !==)</b> similar to .Equal() method in C# to determine the equality without coalescing.
+                <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+                    1 == "1"; // result = true
+
+                    1 === "1"; // result = false
+                </div>
+            </div>
+        </details>
+        <details>
+            <summary><span style="font-weight:bold;padding:3px;margin:5px;">&nbsp;<u>JavaScript Types</u>&nbsp;&nbsp;&nbsp;</span></summary>
+            <div style="border:1px solid lightblue;padding:5px;">
+                Value Type: </b>boolean, string, number<br>
+                <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+                    <b>// typeof: </b>to find type of variable
+                    var a = typeof 1; // "number"
+                    var b = typeof 1.0; // "number"
+                    var c = typeof true; // "boolean"
+                    var e = typeof "akash"; // "string"
+                    <br />
+                    <b>// Number: </b>JavaScript doesn't differentiate between numbers so you don't have to deal with changing from integer to float etc. Number in JavaScrip holds IEEE-754 format
+                    var a = 1; // number (integer)
+                    var b = 1.5; // number (floating point)
+                    var c = 070; // number (octal) = start with zero
+                    var d = 0xfff; // number (hex) = starting with 0x
+                    var e = 1.34e6; // number (Scientific Notation)
+                    <br />
+                    <b>// Nan: </b> on math operation if JavaScript unable to convert in number it will simply return NaN (Not a Number) a special entity
+                    var fail = 10/"zero"; // result NaN (Not a Number)
+                    var r1 = (NaN == NaN); // result = "false" ???huh???<b>Strangly???</b><img src="http://www.pic4ever.com/images/confused0078.gif" border="0">
+                    var r2 = isNaN(NaN); // result = "true" !!!Oho!!!<b>This is the way!!!</b><img src="http://www.pic4ever.com/images/4chsmu1.gif" border="0">
+                    <br />
+                    <b>// String: </b>can be defined by using single or double quote; So we can embeds single quote inside double quote or vice versa;
+                    var s1 = "akash";
+                    var s2 = 'sharma';
+                    var s3 = s1 + s2; // String are immutable same as C#<br>
+                    var thirdChar = s3[2]; // result = 'a' - No array casting required
+                    var length = s3.length; // result = 11
+                    <b>// Unicode character length issue:</b> if you are using Unicode characters we get the length would be based on the bytes it is occupying instead of actual length
+                </div>
+                <b>Reference Type: </b>object<br>
+                Similar to C# (where everything is derived from object class) in JavaScript every object is going to be of type 'object'. And in JavaScript if you check for typeof of any object type you will get 'object' (not the underlying data type).
+                <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+                    // JavaScript
+                    var a = new Object(); // "object"
+                    var b = new Arry(); // "object"
+
+                    Object Literals: to create object in JavaScript - its very similar to anonymous class object C# (but we have to use 'new' keyword in C#)
+
+                    var customer = {
+                    &nbsp;&nbsp;firstName: "akash",
+                    &nbsp;&nbsp;lastName: "sharma
+                    };
+
+                    Array Literals: following is a shortcut way to create collection same as JSON; however in JavaScript has untyped collection
+
+                    var array = [ "akash", "sharma"];
+                </div>
+                In C# we have Stack, Queue and other same functionality can be achieved in JavaScript array because we have 'push', 'pop', 'shift', 'unshift', indexof, lstIndexOf, slice, splice, concat kind of method on it.<br><br>
+                <b>Delegate Type: </b>function<br>
+                <b>Special Type: </b>null, undefined<br>
+                With 'null' we have same concept as C#... a variable that have no object reference associated. The <b>'undefined'</b> determines that variable has not been defined in JavaScript file yet.
+                <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+                    // JavaScropt
+                    var a = null; // a will be "null"
+                    var b = c; // b will be "undefined"
+                </div>
+                <b>Type Detection: </b>In C# we use 'as' or 'is' operator for type detection similarly in JavaScript we can use typeof operator.
+                <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+                    // JavaScropt
+                    var x = 1;
+                    var typeX = typeof x; // result = "number"
+                    // result could be number, boolean, object, function etc.
+                </div>
+            </div>
+        </details>
+        <details>
+            <summary><span style="font-weight:bold;padding:3px;margin:5px;">&nbsp;<u>JavaScript Function</u>&nbsp;&nbsp;&nbsp;</span></summary>
+            <div style="border:1px solid lightblue;padding:5px;">
+                In JavaScript functions are like methods in C# plus they are also like data type (classes).<br><br>
+                We are continue on exploring <a href="https://adsharma.wordpress.com/2016/05/07/c-to-javascript-functions/">JavaScript functions.</a>
+            </div>
+        </details>
+    </div>
+</details>
+<i><span style="float:right;font-weight:bold;color:#0066CC;">- Akash Deep Sharma</span></i>

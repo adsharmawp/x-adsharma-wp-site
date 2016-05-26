@@ -1,0 +1,211 @@
+﻿<details>
+    <summary><b style="color:#ff0000;">Q: What are design patterns?</b></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        Design Patterns are solutions to software design problems we find again and again in real-world application development. They are categorized in three groups: Creational, Structural and Behavioral
+
+        Even in a simple WPF application we are always working Observer for event driven programming &amp; Command patterns to implement MVVM; if we are using foreach then we are working with Iterator; routed events are example of chain of responsibility; for logging we are using Singleton; for object creation we may be using Factory or Abstract factory; when we consume WCF, we are working with Proxy pattern.
+
+        <details>
+            <summary><span style="font-weight:bold;padding:3px;margin:5px;">&nbsp;<u>Creational</u> <em>(abstract of instantiation process)</em></span></summary>
+            <div style="border:1px solid lightblue;padding:5px;">
+                <b>Factory Method</b><b> : </b>Create an instance of several derived classes.
+                <b>Abstract Factory</b><b> : </b>Create an instance of several families of classes.
+                <b>Singleton</b><b> : </b>A class of which only a single instance can exist.
+                <b>Builder</b><b> : </b>Separates object construction from its representation.
+                <b>Prototype</b><b> : </b>A fully initialized instance to be copied or cloned.
+            </div>
+        </details>
+
+        <details>
+            <summary><span style="font-weight:bold;padding:3px;margin:5px;">&nbsp;<u>Structural</u> <em>(how classes and objects are composed to form a larger structure)</em></span></summary>
+            <div style="border:1px solid lightblue;padding:5px;">
+                <b>Adapter</b><b> : </b>Match interfaces of different classes.
+                <b>Composite</b><b> : </b>A tree structure of simple and composite objects.
+                <b>Decorator</b><b> : </b>Add responsibilities to object dynamically.
+                <b>Façade</b><b> : </b>A single class that represents an entire subsystem.
+                <b>Proxy</b><b> : </b>An object representing another object.
+                <b>Bridge</b><b> : </b>Separates an object’s interface from its implementation.
+                <b>Flyweight</b><b> : </b>A fine-grained instance used for efficient sharing.
+            </div>
+        </details>
+
+        <details>
+            <summary><span style="font-weight:bold;padding:3px;margin:5px;">&nbsp;<u>Behavioral</u> <em>(algorithms and assignment of responsibilities)</em></span></summary>
+            <div style="border:1px solid lightblue;padding:5px;">
+                <b>Observer</b><b> : </b>A way of notifying change to a number of classes.
+                <b>Command</b><b> : </b>Encapsulate a command request as an object.
+                <b>Iterator</b><b> : </b>Sequentially access the elements of a collection.
+                <b>Strategy</b><b> : </b>Encapsulates an algorithm inside a class.
+                <b>Template Method</b><b> : </b>Defer the exact steps of an algorithm to a subclass.
+                <b>Chain of Responsibility</b><b> : </b>A way of passing a request between a chain of objects.
+                <b>Interpreter</b><b> : </b> A way to include language elements in a program.
+                <b>Mediator</b><b> : </b>Defines simplified communication between classes.
+                <b>Memento</b><b> : </b>Capture and restore an object’s internal state.
+                <b>State</b><b> : </b>Alter an object’s behavior when its state changes.
+                <b>Visitor</b><b> : </b>Defines a new operation to a class without change.
+            </div>
+        </details>
+    </div>
+</details>
+<details>
+    <summary><b style="color:#ff0000;">Q: Difference between Simple Factory, Factory and Abstract Factory?</b></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        <b>Simple Factory</b> isn’t actually a Design Pattern, it is used to encapsulate object creation logic out of client code so that in future you will have only one place for modification regarding instantiation logic change.
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            class ProductFactory
+            {
+            &nbsp;&nbsp;&nbsp;&nbsp;public static IProduct GetProduct(int i)
+            &nbsp;&nbsp;&nbsp;&nbsp;{
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (i == 1) return new ProductA ();
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (i == 2) return new ProductB ();
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return null;
+            &nbsp;&nbsp;&nbsp;&nbsp;}
+            }
+        </div>
+
+        <b>Factory Pattern</b> defines an interface for creating an object, but let subclasses decide which class to instantiate. And <b>Factory method</b> lets a class defer instantiation to sub classes.
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            //========PRODUCTS=================
+            abstract class IProduct { //... }
+            class ProductA : IProduct { //... }
+            class ProductB : IProduct { //... }
+            //=================================
+            interface Creator {
+            &nbsp;&nbsp;&nbsp;&nbsp;Product FactoryMethod();
+            }
+            class ConcreteCreatorA : Creator {
+            &nbsp;&nbsp;&nbsp;&nbsp;public override Product FactoryMethod() {
+            &nbsp;&nbsp;&nbsp;&nbsp;return new ProductA();
+            } }
+            class ConcreteCreatorB : Creator {
+            &nbsp;&nbsp;&nbsp;&nbsp;public override Product FactoryMethod() {
+            &nbsp;&nbsp;&nbsp;&nbsp;return new ProductB();
+            } }
+        </div>
+
+        <b>Abstract Factory</b> provides an interface for creating families of related or dependent objects without specifying their concreate classes.
+
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            //========PRODUCTS=================
+            interface IProductA { //... }
+            interface IProductB { //... }
+            //========PRODUCTS TYPE A===========
+            class ProductA1 : IProductA { //... }
+            class ProductA2 : IProductA { //... }
+            //========PRODUCTS TYPE B===========
+            class ProductB1 : IProductB { //... }
+            class ProductB2 : IProductB { //... }
+            //===================================
+            interface IAbstractFactory {
+            &nbsp;&nbsp;&nbsp;&nbsp;IProductA CreateProductA();
+            &nbsp;&nbsp;&nbsp;&nbsp;IProductB CreateProductB();
+            }
+            //===================================
+            class ConcreteFactory1:IAbstractFactory{
+            &nbsp;&nbsp;&nbsp;&nbsp;public IProductA CreateProductA() {
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new ProductA1();
+            &nbsp;&nbsp;&nbsp;&nbsp;}
+            &nbsp;&nbsp;&nbsp;&nbsp;public IProductA CreateProductB() {
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new ProductB1();
+            &nbsp;&nbsp;&nbsp;&nbsp;}
+            }
+            //===================================
+            class ConcreteFactory2: AbstractFactory {
+            &nbsp;&nbsp;&nbsp;&nbsp;public IProductB CreateProductA() {
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new ProductA2();
+            &nbsp;&nbsp;&nbsp;&nbsp;}
+            &nbsp;&nbsp;&nbsp;&nbsp;public IProductB CreateProductB() {
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new ProductB2();
+            &nbsp;&nbsp;&nbsp;&nbsp;}
+            }
+        </div>
+    </div>
+</details>
+<details>
+    <summary><b style="color:#ff0000;">Q: How to implement thread safe Singleton Pattern?</b></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        <b>1st Version : Non thread safe : </b>
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            public sealed class Singleton {
+            &nbsp;&nbsp;&nbsp;&nbsp;private static Singleton instance = null;
+            &nbsp;&nbsp;&nbsp;&nbsp;private Singleton() { }
+            &nbsp;&nbsp;&nbsp;&nbsp;public static Singleton Instance {
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get {
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (instance == null)
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;instance = new Singleton();
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return instance;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} // get
+            &nbsp;&nbsp;&nbsp;&nbsp;} // Instance
+            } // Singleton
+        </div>
+        Now suppose two thread simultaneously called Instance property; While first is assigning new object second is also making sure that ‘instance’ variable is null. <span style="color:rgb(255,0,0);">Error:</span> Now both threads have their own copy of Singleton object.
+
+        <b>2nd Version : not quite lazy but without lock</b>
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            public sealed class Singleton {
+            &nbsp;&nbsp;&nbsp;&nbsp;private static Singleton instance = new Singleton();
+            &nbsp;&nbsp;&nbsp;&nbsp;private Singleton() { }
+            &nbsp;&nbsp;&nbsp;&nbsp;public static Singleton Instance {
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get {
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return instance;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} // get
+            &nbsp;&nbsp;&nbsp;&nbsp;} // Instance
+            } // Singleton
+        </div>
+        In particular, if you have static members other than ‘Instance’, the first reference to those members will invoke instance creation.
+
+        <b>3nd Version : simple thread safe</b>
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            public sealed class Singleton
+            {
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private static Singleton instance = null;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private static readonly object thisLock = new object();
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private Singleton() { }
+            &nbsp;&nbsp;&nbsp;&nbsp;public static Singleton Instance {
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get {
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lock (thisLock) {
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (instance == null) instance = new Singleton();
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return instance;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} // lock
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}  // get
+            &nbsp;&nbsp;&nbsp;&nbsp;}  // Instance
+            }  // Singleton
+        </div>
+        Now with the lock mechanism we can force every thread to wait if one thread is already in. But it will introduce the performance issue + the only time lock is relevant is the first time.
+
+        <b>4th Version : thread safe with double check</b>
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            public sealed class Singleton {
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private static Singleton instance = null;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private static readonly object thisLock = new object();
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private Singleton() {
+            &nbsp;&nbsp;&nbsp;&nbsp;}
+            &nbsp;&nbsp;&nbsp;&nbsp;public static Singleton Instance {
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get {
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (instance == null)
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lock (thisLock) {
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (instance == null) instance = new Singleton();
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} // lock
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} // if
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return instance;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} // get
+            &nbsp;&nbsp;&nbsp;&nbsp;} // Instance
+            } // Singleton
+        </div>
+        This approach solves the thread concurrency problem. However most cases static instantiation approach is sufficient.
+    </div>
+</details>
+<details>
+    <summary><b style="color:#ff0000;">Q: What is SOLID Principle?</b></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        SOLID are 5 basic principles which help to create good software architecture.
+        <ul>
+            <li><b>S - Single responsibility principle:</b> a class should have only single responsibility</li>
+            <li><b>O - Open closed principle:</b> should be open for extension, but closed for modification</li>
+            <li><b>L - Liskov substitution principle:</b> objects in a program should be replaceable with instance of their subtypes without altering the correctness of that program</li>
+            <li><b>I - Interface segragation principle:</b> many client-specific interfaces are better than one general-purpose interface</li>
+            <li><b>D - Dependency inversion principle:</b> one should depend upon Abstraction, do not depend upon concretions</li>
+        </ul>
+    </div>
+ </details>

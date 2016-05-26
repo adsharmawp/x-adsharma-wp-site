@@ -1,0 +1,27 @@
+﻿My table has millions of records and I want to show all the records on UI.
+<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:x-large;padding:3px;">&nbsp;<u>Paging</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        As we can use paging mechanism to show the data on UI but if we fetch the data in one go... either we have to wait long to get the data or application will crash due to out of memory exception. What can be the other approach?
+
+        So, the same paging concept can be implemented on the back end in sql also.
+        Example:
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            DECLARE @PageNumber AS INT, @RowspPage AS INT
+            SET @PageNumber = 2
+            SET @RowspPage = 5
+            SELECT * FROM (
+            &nbsp;&nbsp;&nbsp;&nbsp;SELECT ROW_NUMBER() OVER(ORDER BY ID) AS NUMBER,
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ID, NAME, CURRENCY FROM MYTABLE
+            &nbsp;&nbsp;&nbsp;&nbsp;) AS TBL
+            WHERE NUMBER BETWEEN ((@PageNumber - 1) * @RowspPage + 1) AND (@PageNumber * @RowspPage)
+        </div>
+        Above sql can be used as SP to fetch the data as required in paging.
+
+        Following are some must visit links:
+        <a href="http://stackoverflow.com/questions/2308220/is-there-any-performance-issue-using-row-number-to-implement-table-paging-in-sql">SQL Server paging</a>
+        <a href="http://www.4guysfromrolla.com/webtech/042606-1.shtml">A More Efficient Method for Paging Through Large Result Sets</a>
+        <a href="http://social.technet.microsoft.com/wiki/contents/articles/23811.paging-a-query-with-sql-server.aspx">Paging a Query with SQL Server</a>
+    </div>
+</details>
+<i><span style="float:right;font-weight:bold;color:#0066CC;">- Akash Deep Sharma</span></i>

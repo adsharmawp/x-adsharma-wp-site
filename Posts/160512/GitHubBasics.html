@@ -1,0 +1,310 @@
+﻿GitHub is now an industry standard to share and distribute code over the internet.
+<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:x-large;padding:3px;">&nbsp;<u>What is GitHub?</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        GitHub is a web-hosted services for Git repositories or in other words GitHub is cloud based Git Service. Go and visit <a href="https://github.com">https://github.com</a> and sign up now. Once you logged-in time to explore.<br /><br />
+        You can search anything you want; let's for now type 'jQuery' in search box and hit enter...<br />
+        <img src="https://adsharma.files.wordpress.com/2016/05/github01.jpg" style="width:800px;" alt="GitHub01" />
+        <hr />
+        Select first project from the list you will find project repository page something like this:<br />
+        <img src="https://adsharma.files.wordpress.com/2016/05/github02.jpg" style="width:800px" alt="GtiHub02" />
+        <hr />
+        <b><u>Big Picture:</u></b> hmm...there are some buttons on top right corner like...:<br />
+        <ul>
+            <li><b>Watch-</b> Notify me if there is any change in this repository (repo).<br /></li>
+            <li><b>Star-</b> Similar to Facebook’s like button; to show that I love this thing.<br /></li>
+            <li><b>Fork-</b> I want a personal copy of this project in my repo.<br /></li>
+        </ul>
+        And then some tabs...:
+        <ul>
+            <li><b>Code-</b> Show all files of project.</li>
+            <li><b>Issues-</b> To keep track bugs.</li>
+            <li><b>Pull requests-</b> Some contributor made changes and asking to merge in master branch.</li>
+            <li><b>Wiki-</b> To create wiki for project with documentation and FAQ.</li>
+        </ul>
+        Little scroll and you will see 'readme.md' file; kind of overview about the project.<br />
+        <br />
+        Other buttons are also self-explanatory like one is 'Download ZIP' or icon button to save project on your local (if you already have installed GitHub UI tool).<br /><br />
+        <b>3 Major things of GitHub are:</b>
+        <ol>
+            <li><b>Version Control:</b> GitHub keeps all snapshots so you can revert back or check history if required.</li>
+            <li><b>Publishing Project:</b> Any one can download project, customize it and use it locally.</li>
+            <li><b>Collaborating teams:</b> Many developers can work all over the world simultaneously.</li>
+        </ol>
+    </div>
+</details>
+<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:x-large;padding:3px;">&nbsp;<u>What is Git?</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        The core of GitHub is Git @ <a href="https://git-scm.com/">https://git-scm.com/</a> (a distributed version control system).<br /><br />
+        <details>
+            <summary><span style="font-weight:bold;padding:3px;margin:5px;">&nbsp;<u>Cetralized Vs. Distributed VCS</u>&nbsp;&nbsp;&nbsp;</span></summary>
+            <div style="border:1px solid lightblue;padding:5px;">
+                <b>Cetralized VCS: </b> Maintain central repository and individual can 'check-out' files and 'check-in' once done with changes.<br />
+                <b>Distributed VCS: </b> Each client keeps a local mirror repository; Individual change 'pull' or 'push' changes from other repos or sync changes within multiple repos.<br /><br />
+                When working with centralized version control system; you might have encountered a situation when you have to create multiple copy of a project (might be due to many different issues) on your local machine and once you done with the changes you merge them back to master copy manually and commit the changes. However VCS (Version Control System) can make this process very easy and unfortunately that is available for main branch to VCS only. But with Git this is available on every terminal because every terminal is now a VCS itself. This can help great while you are tracking changes (locally) and prevent overwriting or inadvertently deleting files.
+            </div>
+        </details>
+        <details>
+            <summary><span style="font-weight:bold;padding:3px;margin:5px;">&nbsp;<u>Installing Git</u>&nbsp;&nbsp;&nbsp;</span></summary>
+            <div style="border:1px solid lightblue;padding:5px;">
+                Git can be installed from git site; or easier way is to install it through GitHub client from <a href="http://windows.github.com">http://windows.github.com</a>. It will install 'Git' and 'GitHub Client'.<br />
+                We will go to use 'GitHub Client' later but we can also use 'Git' directly from command line.  Now with this installation should have two icons on your desktop 'GitHub' (UI Tool) and 'GitHub' and 'Git Shell'.
+            </div>
+        </details>
+        <details>
+            <summary><span style="font-weight:bold;padding:3px;margin:5px;">&nbsp;<u>Command Line Basics</u>&nbsp;&nbsp;&nbsp;</span></summary>
+            <div style="border:1px solid lightblue;padding:5px;">
+                Little understanding on command line (power shell) can help you lot on using git command:
+                <table style="border-collapse:collapse" border="1">
+                    <tr>
+                        <th>Dos</th>
+                        <th>PowerShell</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>-</td>
+                        <td><b>pwd</b></td>
+                        <td>to get present working directory</td>
+                    </tr>
+                    <tr>
+                        <td>mkdir myFolder</td>
+                        <td>mkdir myFolder</td>
+                        <td>to create myFolder folder</td>
+                    </tr>
+                    <tr>
+                        <td>cd myFolder</td>
+                        <td>cd ./myFolder</td>
+                        <td>to enter in myFolder path</td>
+                    </tr>
+                    <tr>
+                        <td>cd..</td>
+                        <td>cd..</td>
+                        <td>to return from myFolder path</td>
+                    </tr>
+                    <tr>
+                        <td>dir</td>
+                        <td>dir, <b>ls</b></td>
+                        <td>to get list of dir &amp; files</td>
+                    </tr>
+                </table>
+            </div>
+        </details>
+        <details>
+            <summary><span style="font-weight:bold;padding:3px;margin:5px;">&nbsp;<u>Account Setup on Local</u>&nbsp;&nbsp;&nbsp;</span></summary>
+            <div style="border:1px solid lightblue;padding:5px;">
+                Now you can set your account on local git either by 'Git Shell' or 'Git Hut UI Tool'.<br />
+                <b>Account Setting by GitHub Desktop:</b> Run 'GitHub' (icon placed on desktop) and go to the setting icon on top right corner -> Options and provide your GitHub account details on 'Configure git' section. You can also set how your default shell should behave (like cmd, Git Bash, PowerShell etc..) We'll use PowerShell here. Why? because it gives you more comprehensive picture of status and branch.<br />
+                <b>Account Setting by GitShell:</b> Commands are always powerful then UI utility in many scenario but definitely less comprehensive for some people. So we have following commands for account setting:<br />
+                // to set user name<br />
+                <b>> git cofig --global user.name "Akash Sharma"</b><br />
+                // to set email<br />
+                <b>> git config --global user.email "ad.sharma@hotmail.com"</b><br />
+                // to get all config info<br />
+                <b>> get config --list</b>
+            </div>
+        </details>
+        <details>
+            <summary><span style="font-weight:bold;padding:3px;margin:5px;">&nbsp;<u>How Git works...</u>&nbsp;&nbsp;&nbsp;</span></summary>
+            <div style="border:1px solid lightblue;padding:5px;">
+                Git works by taking snap-shots each time you save (commit) current state. Every new commit points back to older commit… and each commit represent by a 40 character hash like ‘a7fa2354...’; but Git also provides a short 7 character hash like ‘a7fa235’ for easier to identify and remember.<br />
+                If you initialize a folder as ‘Git Repo’ git creates some hidden files just like SVN to track all the changes.<br /><br />
+                * There 3 basic <b>areas</b> of the project:
+                <ul>
+                    <li><b>Working directory:</b> Current state of your files.</li>
+                    <li><b>Staging area:</b> Contains index of every changes for next commit.</li>
+                    <li><b>Git Repo:</b> Once you commit changes are in Git Repo.</li>
+                </ul>
+                * Any time each file will be in any of the 3 <b>state</b>:
+                <ul>
+                    <li><b>Unmodified:</b> Not changed science last commit.</li>
+                    <li><b>Modified:</b> File changed sicence last commit.</li>
+                    <li><b>Stage: </b> Staging a file mean ready for next commit. </li>
+                </ul>
+            </div>
+        </details>
+        <details>
+            <summary><span style="font-weight:bold;padding:3px;margin:5px;">&nbsp;<u>Initialize Git Repo</u>&nbsp;&nbsp;&nbsp;</span></summary>
+            <div style="border:1px solid lightblue;padding:5px;">
+                You have a folder on your local machine and you want to create it as Git Repo. Very simple command 'git init'.<br />
+                // Initialize folder as Git Repo and create a master branch<br />
+                <b>C:\github\git-first> git init</b><br />
+                <img src="https://adsharma.files.wordpress.com/2016/05/git01.jpg" />
+            </div>
+        </details>
+        <details>
+            <summary><span style="font-weight:bold;padding:3px;margin:5px;">&nbsp;<u>Get Git Status</u>&nbsp;&nbsp;&nbsp;</span></summary>
+            <div style="border:1px solid lightblue;padding:5px;">
+                Status for information if there is any modified or pending for commit etc.<br />
+                // to get current status<br />
+                <b>C:\github\git-first> git status</b><br />
+                <img src="https://adsharma.files.wordpress.com/2016/05/git02.jpg" />
+            </div>
+        </details>
+        <details>
+            <summary><span style="font-weight:bold;padding:3px;margin:5px;">&nbsp;<u>Get Untracked Files</u>&nbsp;&nbsp;&nbsp;</span></summary>
+            <div style="border:1px solid lightblue;padding:5px;">
+                Now create a file 'a.txt' with some content and try status command again:<br />
+                <img src="https://adsharma.files.wordpress.com/2016/05/git03.jpg" /><br />
+                Now the file 'a.txt' is currently untracked means Git is not tracking any changes you are making in that file.
+            </div>
+        </details>
+        <details>
+            <summary><span style="font-weight:bold;padding:3px;margin:5px;">&nbsp;<u>Add Untracked Files</u>&nbsp;&nbsp;&nbsp;</span></summary>
+            <div style="border:1px solid lightblue;padding:5px;">
+                Now add that file in Git so it can be tracked with further changes. Following are few commands:<br />
+                // to add 'a.txt' in repo<br />
+                <b>C:\github\git-first> git add a.txt</b><br />
+                // if there are more files name can be given with a space seperation<br />
+                <b>C:\github\git-first> git add a.txt b.txt c.txt</b><br />
+                // to add all .txt files OR<br />
+                <b>C:\github\git-first> git add *.txt</b><br />
+                // to add all untracked folders or files<br />
+                <b>C:\github\git-first> git add .</b><br />
+                <img src="https://adsharma.files.wordpress.com/2016/05/git04.jpg" /><br />
+                Git also provides color indications of whats going there...how many untracked or added file are there. (Red: untracked; Green: added but not commited etc.)
+            </div>
+        </details>
+        <details>
+            <summary><span style="font-weight:bold;padding:3px;margin:5px;">&nbsp;<u>Git Commit Changes</u>&nbsp;&nbsp;&nbsp;</span></summary>
+            <div style="border:1px solid lightblue;padding:5px;">
+                While commiting your changes you need to provide a message/comment:<br />
+                <b>C:\github\git-first> git commit -m "my first file"</b><br />
+                <img src="https://adsharma.files.wordpress.com/2016/05/git05.jpg" />
+            </div>
+        </details>
+        <details>
+            <summary><span style="font-weight:bold;padding:3px;margin:5px;">&nbsp;<u>Modify File Status</u>&nbsp;&nbsp;&nbsp;</span></summary>
+            <div style="border:1px solid lightblue;padding:5px;">
+                If you modify any file that is already commited; you can check git status:<br />
+                <img src="https://adsharma.files.wordpress.com/2016/05/git06.jpg" /><br />
+                Now you can check the diffrences between your file and previous commited file:<br />
+                <b>C:\github\git-first> git diff</b><br />
+                <img src="https://adsharma.files.wordpress.com/2016/05/git07.jpg" /><br />
+                If you are ok with the changes first <b>Stage it (add it)</b> -> them <b>Commit it</b><br />
+                <b>C:\github\git-first> git add .</b><br />
+                <b>C:\github\git-first> git commit -m 'my commit comments'</b><br />
+                Or you can do both the things in just one command:<br />
+                <b>C:\github\git-first> git commit -a -m 'my commit comments'</b><br />
+            </div>
+        </details>
+        <details>
+            <summary><span style="font-weight:bold;padding:3px;margin:5px;">&nbsp;<u>Branching Repo</u>&nbsp;&nbsp;&nbsp;</span></summary>
+            <div style="border:1px solid lightblue;padding:5px;">
+                Once you get a copy from git repo then you are on 'master'branch now:<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;- You can create one or more branch any time.<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;- You can create new branch from branch.<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;- Once you are done on branch you can merge change on master.<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;- Once you are done on master you can 'push' the changes to main Git Repo.<br />
+                // to create branch1<br />
+                <b>C:\github\git-first> git branch branch1</b><br />
+                // to start working on branch1<br />
+                <b>C:\github\git-first> git checkout branch1</b><br />
+                <img src="https://adsharma.files.wordpress.com/2016/05/git08.jpg" /><br />
+                Let's go to master branch and create one more branch...<br />
+                <img src="https://adsharma.files.wordpress.com/2016/05/git09.jpg" /><br />
+                // following command not only create branch but also do the switch also<br />
+                This <b>git checkout -b branch2</b><br />
+                You can see all the branches any time by following command:<br />
+                <img src="https://adsharma.files.wordpress.com/2016/05/git10.jpg" /><br />
+            </div>
+        </details>
+        <details>
+            <summary><span style="font-weight:bold;padding:3px;margin:5px;">&nbsp;<u>Modification on Branch</u>&nbsp;&nbsp;&nbsp;</span></summary>
+            <div style="border:1px solid lightblue;padding:5px;">
+                First switched to master branch and go to the folder and open 'a.txt' just to check what is in there...:<br />
+                <img src="https://adsharma.files.wordpress.com/2016/05/git11.jpg" /><br />
+                Now switched to 'branch1' and open this file again and modify first line.<br />
+                <img src="https://adsharma.files.wordpress.com/2016/05/git12.jpg" /><br />
+                Now check status with 'git status'<br />
+                <img src="https://adsharma.files.wordpress.com/2016/05/git13.jpg" /><br />
+                Now branch1 is one step ahead from my master.<br />
+                <b>Physical Changes:</b> To see physical changes you can navigate back to master branch and open 'a.txt'; you will not be able to see the change done in branch1. Now if you go back in branch1 and again open the same file you will see the changes.
+            </div>
+        </details>
+        <details>
+            <summary><span style="font-weight:bold;padding:3px;margin:5px;">&nbsp;<u>Merge change to master (Fast-Forward)</u>&nbsp;&nbsp;&nbsp;</span></summary>
+            <div style="border:1px solid lightblue;padding:5px;">
+                At some point you want to merge your branch changes to master.<br />
+                Navigat to master first and make sure there are no unmodified changes are there...<br />
+                <b>C:\github\git-first [master]> git merge branch1</b><br />
+                <img src="https://adsharma.files.wordpress.com/2016/05/git14.jpg" /><br />
+                As there were no changes on master branch this will called 'Fast-forward' for master.
+            </div>
+        </details>
+        <details>
+            <summary><span style="font-weight:bold;padding:3px;margin:5px;">&nbsp;<u>Merge change to master (Auto-Merge)</u>&nbsp;&nbsp;&nbsp;</span></summary>
+            <div style="border:1px solid lightblue;padding:5px;">
+                Now as master branch is updated with branch1 changes;<br />
+                But branch2 is an older copy of master branch so any change on branch2 will either going to auto merge or we have to manually merge (based on the situation).<br />
+                Now first switch to 'branch2' and open 'a.txt' (now a.txt is old master file) and add one more line on bottom:<br />
+                <img src="https://adsharma.files.wordpress.com/2016/05/git161.jpg" /><br />
+                As changes are totally in diffrent places of file they will be automatically merge by git.<br />
+                <img src="https://adsharma.files.wordpress.com/2016/05/git181.jpg" /><br />
+            </div>
+        </details>
+        <details>
+            <summary><span style="font-weight:bold;padding:3px;margin:5px;">&nbsp;<u>Merge change to master (Manuall-Merge)</u>&nbsp;&nbsp;&nbsp;</span></summary>
+            <div style="border:1px solid lightblue;padding:5px;">
+                Now suppose both branches made change on same line then auto merge is not gong to work. You manually have to decide what changes need to be placed.<br />
+                Let's create 2 more branches from master called 'branch3' and 'branch4' and both going to make changes on same line number.<br />
+                <img src="https://adsharma.files.wordpress.com/2016/05/git191.jpg" /><br />
+                And change line number 2 as:<br />
+                <img src="https://adsharma.files.wordpress.com/2016/05/git201.jpg" /><br />
+                Now merge the changes in master file.<br />
+                <img src="https://adsharma.files.wordpress.com/2016/05/git211.jpg" /><br />
+                And now go to branch 4 and do the changes in same line.<br />
+                <img src="https://adsharma.files.wordpress.com/2016/05/git221.jpg" /><br />
+                <img src="https://adsharma.files.wordpress.com/2016/05/git231.jpg" /><br />
+                <img src="https://adsharma.files.wordpress.com/2016/05/git241.jpg" /><br />
+                <img src="https://adsharma.files.wordpress.com/2016/05/git25.jpg" /><br />
+                As you can see there is a confilit and auto merge is not working; now go to 'a.txt' file and merge changes mannually.<br />
+                <img src="https://adsharma.files.wordpress.com/2016/05/git26.jpg" /><br />
+                This is clear that first one far from HEAD that is master branch and there is a seperation line with (===) and code from branch4. Now you manually do the changes and commit the changes accordingly. Suppose you want to keep the changes from branch4.. simply delete the hiligted text and commit the code:<br />
+                <img src="https://adsharma.files.wordpress.com/2016/05/git27.jpg" /><br />
+                <img src="https://adsharma.files.wordpress.com/2016/05/git28.jpg" /><br />
+            </div>
+        </details>
+        <details>
+            <summary><span style="font-weight:bold;padding:3px;margin:5px;">&nbsp;<u>Delete a branch</u>&nbsp;&nbsp;&nbsp;</span></summary>
+            <div style="border:1px solid lightblue;padding:5px;">
+                To delete a exiting branch:<br />
+                <b>C:\github\git-first [master]> git branch -d branch1</b><br />
+                <b>C:\github\git-first [master]> git branch -d branch2</b><br />
+                <b>C:\github\git-first [master]> git branch -d branch3</b><br />
+                <b>C:\github\git-first [master]> git branch -d branch4</b><br />
+                <img src="https://adsharma.files.wordpress.com/2016/05/git29.jpg" /><br />
+                But if there are changes in the branch that are not merged to main branch till yet; git will not allow you to delte the branch. So in that situation you either need to merge the changes or you can simply hard delete a branch by using -D insted of -d.
+            </div>
+        </details>
+        <details>
+            <summary><span style="font-weight:bold;padding:3px;margin:5px;">&nbsp;<u>Push file to GitHub</u>&nbsp;&nbsp;&nbsp;</span></summary>
+            <div style="border:1px solid lightblue;padding:5px;">
+                Every thing was done so far are just local changes now its time to push the changes on remote git repository.<br />
+                Go to GitHub.com and create new repository:<br />
+                There is a plus '+' symbol on top right corner and inside that there is an option to create 'New repository' or on the bottom there is button to do so. Just click on button:<br />
+                <img src="https://adsharma.files.wordpress.com/2016/05/github031.jpg" /><br />
+                Fields and options are:<br />
+                <b>Repository Name: </b>Lets keep it same 'git-firt'; but can be diffrent..<br />
+                <b>Description: </b>What every you want...<br />
+                <b>Public: </b>You need to pay if you want privte one.<br />
+                <b>Initialize with README: </b>to provide overview of your project.<br />
+                <b>GitIgnore file: </b>to avoid changes track of system files...in visual studio its dll, log etc.<br />
+                <b>Add licence: </b>licencing information of this project.<br />
+                <img src="https://adsharma.files.wordpress.com/2016/05/github041.jpg" /><br />
+                Now copy https path to push the changes in this location and navigate to Git command line tool:<br />
+                <b>> git remote add origin https://github.com/adsharmawp/git-first.git </b><br />
+                // If no error on above line mean everything is fine<br />
+                <b>> git push -u origion master</b><br />
+                Now origion is kind of variable and we set it to the path where we want to upload our repo.<br />
+                -u is for upstream and master is the branch we want to push.<br />
+                <img src="https://adsharma.files.wordpress.com/2016/05/git301.jpg" /><br />
+                Now go back to your githup and refresh the page: and you have 'a.txt' on GitHub!!!<br />
+                <img src="https://adsharma.files.wordpress.com/2016/05/github05.jpg" /><br />
+                You can see the comments of all the commits; there is only one contributer now and other information...<br />
+                Now you may want to add readme file to give overview of your project.
+            </div>
+        </details>
+    </div>
+</details>
+<i><span style="float:right;font-weight:bold;color:#0066CC;">- Akash Deep Sharma</span></i>

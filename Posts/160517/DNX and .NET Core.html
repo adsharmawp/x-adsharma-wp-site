@@ -1,0 +1,51 @@
+﻿The .NET Execution Environment (DNX) provides a cross-platform runtime to build <b>.NET Core</b> based applications that can run on Windows, Mac and Linux.
+<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:x-large;padding:3px;">&nbsp;<u>DNX</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        Application running on DNX can target the <b>.NET</b> Framework or <b>.NET Core</b>.
+
+        In the past working in .NET for non-Windows platform has been dependent on third-party frameworks like Mono. Now with VS2015 and DNX Microsoft stepped up to provide everything you need to code multi-platform app.
+
+        DNX, a Dot Net eXecution environment, contains all of the code that is required to bootstrap and run an application. It includes the compilation system, SDK tools and the native CLR host, with NuGet packages being used to access assemblies that are referenced by the application. This system gives us the ability, for the first time ever, to deploy applications merely by copying them. Each application can reside in its own directory which will contain the NuGet packages for all of its dependencies.
+    </div>
+</details>
+<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:x-large;padding:3px;">&nbsp;<u>.NET Core</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        <img src="http://www.greymatter.com/corporate/wp-content/uploads/2015/11/corediagram.png" />
+        One of the main limitations of the .NET Framework was that it failed to share code across platforms. Now, however, .NET Core will provide developers with a library which can be deployed over various platforms and which also allows developers to import just the parts of the Framework they need for their projects.
+        The .Net Core Runtime has been released to the open-source community who will collaborate with the .NET team to improve and extend the platform. The .NET Core source packages are stored on GitHub, which uses Git as a source control system.
+        The structure of .NET Core is comprised of two major components which add to and extend the capabilities of the .NET Framework as follows:
+        <b>Runtime:</b>
+        <ul>
+            <li>Built on the same codebase as the .Net Framework CLR</li>
+            <li>Includes the same GC and JIT</li>
+            <li>Does not include features like Application Domains or Code Access Security</li>
+            <li>The runtime is delivered on NuGet (Microsoft.CoreCLR package)</li>
+        </ul>
+        <b>Base class libraries</b>
+        <ul>
+            <li>Are the same code as the .Net Framework class libraries but do not contain dependencies so have a smaller footprint.</li>
+            <li>Available on NuGet (System.* package)</li>
+        </ul>
+    </div>
+</details>
+<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:x-large;padding:3px;">&nbsp;<u>ASP.NET 5</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        ASP.NET 5 framework completely rewritten from ground.
+
+        ASP.NET framework is 15 years old, but as web development world has changed a lot over those 15 years so many of the features are now obsolete and now we have better ways of development. Example:
+        In past .NET framework was very tightly coupled to Windows OS and ASP.NET was coupled with IIS but now it is totally decoupled from Windows and IIS. This is to take advantage of other OS and hosting and to take more module approach to allow developer to include only the part of the framework that they need.
+
+        Biggest diffrence is that .NET Core not centrally installed on one machine but rather copied locally with each application like any other 3rd party. So now it is possible that diffrent application are running on diffrent .NET Core framework.
+        <ul>
+            <li>System.Web namespace is now removed from .NET Core</li>
+            <li>Web API Framework classes are completely gone. (They are in ASP.NET MVC only)</li>
+        </ul>
+        In past ASP.NET heavily was dependent on System.Web.HttpContex for request and response; The class is still there with request and response properties but the are not linked to that namespace any more.
+        Morden web development has lot of moving parts, so now ASP.NET 5 application don't require compilation mean they are compiled on fly and new compiler is smart to only compile the code that is changed.
+        Now ASP.NET and Visual Studio have fully embraced morden web development is through full integration with popular web tools like NPM, Grunt and Gulp and fully rely on client side package management tools like Bower.
+    </div>
+</details>
+<i><span style="float:right;font-weight:bold;color:#0066CC;">- Akash Deep Sharma</span></i>

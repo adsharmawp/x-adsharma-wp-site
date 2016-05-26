@@ -1,0 +1,370 @@
+﻿<details>
+    <summary><strong style="color:#ff0000;">Q: What is WPF (Windows Presentation Foundation)?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        WPF is a graphical subsystem for rendering UI. Rather than relying on GDI subsystem (like WinForm), WPF uses DirectX. WPF is based on vector graphics (composed of paths) not raster graphics (composed of pixels).
+        <img src="https://i-msdn.sec.s-msft.com/dynimg/IC159631.png"/><img src="http://ptgmedia.pearsoncmg.com/images/chap3_9780672336973/elementLinks/03fig01_alt.jpg" />
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: What is XAML (Extensible Application Markup Language)?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        XAML is declarative markup language. In WPF it is used to create application UI.
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: What is DP (Dependency Property) in WPF?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        Dependency Properties are properties of class that derived from DependencyObject. Unlike simply using backing field to store object they use some helper method to resolve.
+
+        DP resolves dynamically (unlike read directly) from Animation, Binding, Local Value, Style, Inheritance or Default etc. Advantages are:
+
+        <b>Reduced memory footprint</b>- As 90% of properties of a UI control typically stay at its initial value and DP only store modified properties in the instance. The default values are stored once within the dependency property.
+        <b>Value Inheritance</b>- If no local value is set, DP navigates up in logical tree until it finds a value. Example: FontSize
+        <b>Change Notification</b>- DP has a built-in change notification mechanism.
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            <span style="color:#008000;">// Dependency Property</span>
+            public static readonly DependencyProperty CurrentTimeProperty = DependencyProperty.Register("CurrentTime", typeof(DateTime), typeof(MainWindow), new FrameworkPropertyMetadata(DateTime.Now));
+
+            <span style="color:#008000;">// .NET Property wrapper</span>
+            public DateTime CurrentTime
+            {
+            &nbsp;&nbsp;&nbsp;&nbsp;get { return (DateTime)GetValue(CurrentTimeProperty); }
+            &nbsp;&nbsp;&nbsp;&nbsp;set { SetValue(CurrentTimeProperty, value); }
+            }
+        </div>
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: What is App.xaml file in WPF?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        App.xaml is a declarative starting point of WPF application and can be used to define global resources. Property ‘StartupUri’ tells what window is going to load. If you want more control over how first window displays remove ‘StartupUri’ property and assign ‘Starup’ event in the code behind.
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: What layout controls are available in WPF?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        Grid, StackPanel, DockPanel, Canvas, WrapPanel.
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: What is Binding in WPF?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        Binding is primarily used for populating Model’s (DataContext) properties on UI. In WPF data binding copies value from source to target.
+
+        Simple data binding is for single value and complex data binding for displaying and formatting a collection of data.
+
+        Following are some binding class properties in WPF:
+        <ul>
+            <li><b>Converter</b>- Sets the converter, to convert source value type to target value type.</li>
+            <li><b>ElementName</b>- The name of the element to which the binding is to be made for back-end programming or to use in other binding.</li>
+            <li><b>Mode</b>- Sets direction of the binding. (OneWay, TwoWay, OneTime, OneWayToSource)</li>
+            <li><b>Path</b>- The path to the element is property being used as the data source.</li>
+            <li><b>Source</b>- Source object to used for binding.</li>
+            <li><b>RelativeSource</b>- Specify source relative to the current element.(Self, TemplateParent, AncestorType)</li>
+            <li><b>StringFormat</b>- Specify string representation of value. Example: StringFormat=Date: {0:dddd, MMMM dd}</li>
+            <li><b>UpdateSourceTrigger</b>- Sets the event on which binding will occur.(Example: Default, PropertyChanged, Explicit)</li>
+            <li><b>ValidationRules</b>- A collection of validation rules applied against a binding.</li>
+        </ul>
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: You are binding a value to a property on UI but the value is null, will it crash my application?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        UI exception doesn’t crash a WPF program. If running from VS a message will log in the Output Window.
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: What is routed event in WPF?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        Routed events are events which can travel up or down in visual tree hierarchy. Are 3 types: Direct, Bubbling &amp; Tunneling.
+        <b>Direct</b>- event raised at the source and handled at the source itself like “MouseEnter” event.
+        <b>Bubbling</b>- They travel up the visual tree hierarchy. Example ‘MouseDown’
+        <b>Tunneling</b>- They travel down in visual tree hierarchy. Example ‘PreviewKeyDown’, preview events use tunnel approach.
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            &lt;Window … Background="Black"
+            &nbsp;&nbsp;&nbsp;&nbsp;<b>PreviewMouseDown="WindowPreviewMouseDown" MouseDown="WindowMouseDown"</b>&gt;
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;Grid Margin="10″ Background="Green"
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>PreviewMouseDown="GridPreviewMouseDown" MouseDown="GridMouseDown"</b>&gt;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;StackPanel Margin="10″ Background="Blue"
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>PreviewMouseDown="SPPreviewMouseDown" MouseDown="StackPanelMouseDown"</b>&gt;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;TextBox … /&gt;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/StackPanel&gt;
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;/Grid&gt;
+            &lt;/Window&gt;
+        </div>
+        <img style="width:250px;height:220px;" src="https://adsharma.files.wordpress.com/2016/02/routedevents.jpg" alt="" /> <a href="https://github.com/adsharmawp/WpfRoutedEvents">Go to full Example</a>
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: What is IValueConverter and IMultiValueConverter?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        If you want to bind property that is incompatible to the UI, you need a piece of code in between, that converts the value from source to target type and back. This piece of code is called ValueConverter. [<a href="https://adsharma.wordpress.com/2016/02/25/wpf-valueconverters/">Example</a>]
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: What is difference between StaticResource and DynamicResource?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        Static referred resources evaluate the resource only once and after that if resource changes those changes will not reflect in binding. While dynamic resources are evaluated every time the resource is needed.
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: What are MVVM and why should we use it?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        MVVM is an architecture pattern to split the code into 3 conceptual parts with advantages like 'Separation of Concern' &amp; allow loose coupling, Testability with mockability, better UI Reusability [<a href="https://github.com/adsharmawp/Wpf-Simple-MVVM">Full Example</a>].
+        <b>Model</b>- represents data coming from the service/database.
+        <b>View</b>- visual representation of data; the way it is seen and interacts by the user.
+        <b>ViewModel</b>- it’s glue between View and Model and also responds on View’s interaction.
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: What is ICommand or RelayCommand or DelegateCommand in WPF?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        ICommand is an interface in .NET to implement Command Pattern (Encapsulate a command request as an object). Generally when we implement ICommand in a class we name it RelayCommand or DelegateCommand. The intention is that you should not have to implement a new class for each single command in your project rather pass all necessary methods as parameters to RelayCommand.
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            public class RelayCommand&lt;T&gt; : ICommand
+            {
+            &nbsp;&nbsp;&nbsp;&nbsp;// private Fields
+            &nbsp;&nbsp;&nbsp;&nbsp;readonly Action&lt;T&gt; _execute = null;
+            &nbsp;&nbsp;&nbsp;&nbsp;readonly Predicate&lt;T&gt; _canExecute = null;
+
+            &nbsp;&nbsp;&nbsp;&nbsp;// public Constructors
+            &nbsp;&nbsp;&nbsp;&nbsp;public RelayCommand(Action&lt;T&gt; execute) : this(execute, null) { }
+            &nbsp;&nbsp;&nbsp;&nbsp;public RelayCommand(Action&lt;T&gt; execute, Predicate&lt;T&gt; canExecute)
+            &nbsp;&nbsp;&nbsp;&nbsp;{
+            &nbsp;&nbsp;&nbsp;&nbsp;if (execute == null) throw new ArgumentNullException("execute");
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this._execute = execute;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this._canExecute = canExecute;
+            &nbsp;&nbsp;&nbsp;&nbsp;}
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;<i>
+                // CommandManager.RequerySuggested event is raised whenever the CommandManager thinks that something has changed
+                &nbsp;&nbsp;&nbsp;&nbsp;// and that will affect the ability of commands to execute. For example this might be a change of focus.
+            </i>
+            &nbsp;&nbsp;&nbsp;&nbsp;public event EventHandler CanExecuteChanged
+            &nbsp;&nbsp;&nbsp;&nbsp;{
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;add { CommandManager.RequerySuggested += value; }
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;remove { CommandManager.RequerySuggested -= value; }
+            &nbsp;&nbsp;&nbsp;&nbsp;}
+            &nbsp;&nbsp;&nbsp;&nbsp;<i>// canExecuteEvaluator is what decides if it is possible to execute the command</i>
+            &nbsp;&nbsp;&nbsp;&nbsp;public bool CanExecute(object parameter)
+            &nbsp;&nbsp;&nbsp;&nbsp;{
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return _canExecute == null ? true : _canExecute((T)parameter);
+            &nbsp;&nbsp;&nbsp;&nbsp;}
+            &nbsp;&nbsp;&nbsp;&nbsp;<i>// methodToExecute is the actual method of the command</i>
+            &nbsp;&nbsp;&nbsp;&nbsp;public void Execute(object parameter)
+            &nbsp;&nbsp;&nbsp;&nbsp;{
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_execute((T)parameter);
+            &nbsp;&nbsp;&nbsp;&nbsp;}
+            }
+        </div>
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: What are triggers in WPF? What is the difference between Property, Data or Event Triggers?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        By using triggers, we can change the value of a given property, once certain condition changes.
+
+        <b>Event Trigger</b>: when RoutedEvent raises and mostly used to trigger an animation.</td>
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            &lt;EventTrigger RoutedEvent="Mouse.MouseEnter"&gt;
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;BeginStoryboard&gt;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Storyboard&gt;...&lt;Storyboard&gt;
+            &nbsp;&nbsp;&nbsp;&nbsp;/BeginStoryboard&gt;
+           &lt;/EventTrigger&gt;
+        </div>
+
+        <b>Data Trigger</b>: when Data on Binding matches specific condition.
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            &lt;DataTrigger Binding="{Binding Path=Picture}" Value="{x:Null}"&gt;
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;Setter ...
+            &lt;/DataTrigger&gt;
+        </div>
+
+        <b>Property Trigger</b>: when UIElements property changes.
+        <b>Example with MultiTrigger</b>: to set actin on Multiple property change.</td>
+
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            &lt;Button Content="Hello" x:Name="btn" Background="Yellow"&gt;
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;Button.Style&gt;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Style TargetType="Button"&gt;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Style.Triggers&gt;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;MultiTrigger&gt;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;MultiTrigger.Conditions&gt;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Condition Property="IsPressed" Value="True" /&gt;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Condition Property="Background" Value="Yellow" /&gt;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/MultiTrigger.Conditions&gt;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;MultiTrigger.Setters&gt;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Setter Property="Foreground" Value="Red" /&gt;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/MultiTrigger.Setters&gt;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/MultiTrigger&gt;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/Style.Triggers&gt;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/Style&gt;
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;/Button.Style&gt;
+            &lt;/Button&gt;
+        </div>
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: What is INotifyPropertyChanged?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        This interface provides a standard way to notify binding clients if property value changes. Example:
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            public class Employee : INotifyPropertyChanged
+            {
+            &nbsp;&nbsp;&nbsp;&nbsp;private string firstName;
+            &nbsp;&nbsp;&nbsp;&nbsp;public string FirstName 
+            &nbsp;&nbsp;&nbsp;&nbsp;{
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get { return firstName; }
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set { firstName = value; OnPropertyChange("FirstName"); }
+            &nbsp;&nbsp;&nbsp;&nbsp;}
+
+            &nbsp;&nbsp;&nbsp;&nbsp;private string lastName;
+            &nbsp;&nbsp;&nbsp;&nbsp;public string LastName
+            &nbsp;&nbsp;&nbsp;&nbsp;{
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get { return lastName; }
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set { lastName = value; OnPropertyChange("LastName"); }
+            &nbsp;&nbsp;&nbsp;&nbsp;}
+
+            &nbsp;&nbsp;&nbsp;&nbsp;public Employee(string firstName, string lastName)
+            &nbsp;&nbsp;&nbsp;&nbsp;{
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.FirstName = firstName;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.LastName = lastName;
+            &nbsp;&nbsp;&nbsp;&nbsp;}
+
+            &nbsp;&nbsp;&nbsp;&nbsp;public event PropertyChangedEventHandler PropertyChanged;
+
+            &nbsp;&nbsp;&nbsp;&nbsp;public void OnPropertyChange(string propertyName)
+            &nbsp;&nbsp;&nbsp;&nbsp;{
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (PropertyChanged != null)
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            &nbsp;&nbsp;&nbsp;&nbsp;}
+            }
+        </div>
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: What is ObservableCollection?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        ObservableCollection is a generic dynamic data collection that provides notifications when items get added, removed or when the whole collection is refreshed.
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            ObservableCollection employees = new ObservableCollection();
+            employees.Add(new Employee("Akash", "Sharma"));
+        </div>
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: What is Visual tree or Logical tree?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        <img class="alignnone size-full wp-image-697" src="https://adsharma.files.wordpress.com/2016/02/wpfvisuallogicaltree.jpg" alt="WPFVisualLogicalTree.jpg" />
+        Elements of a WPF user interface are hierarchically related.Visual tree represents all of the elements in your UI which render to an output device/screen.
+
+        Logical tree represents essential structure of your UI and closely matches the elements you declare in XAML.
+
+        Sometimes if you are not interested in template parts you have logical tree to navigate.
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: What is attached property?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        Attached property is a kind dependency property. We define Attached property in one class and use them in different class.
+    </div>
+</details>
+
+<details>
+    <summary><strong style="color:#ff0000;">Q: What is Resources in WPF?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        This is the ability to store data as resource, either locally for a control, locally for the entire window or globally for the entire application. Data can be whatever you want, actual information, hierarchy of WPF control, style or templates. Resources are given a key, using x:Key attribute, which allow use to reference it from other parts.
+    </div>
+</details>
+
+<details>
+    <summary><strong style="color:#ff0000;">Q: What are Resource Dictionary and Merged Dictionary?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        Resource Dictionary (Resource) is keyed dictionary of objects were as Merged Dictionary feature allow us to define the resource portion outside the application. So with this way resources can be shared across applications.
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            &lt;Window.Resources&gt;
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;ResourceDictionary&gt;
+            &nbsp;&nbsp;&nbsp;&nbsp;<b>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;ResourceDictionary.MergedDictionaries&gt;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&nbsp;&nbsp;&nbsp;&nbsp;ResourceDictionary Source="myresourcedictionary.xaml" /&gt;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&nbsp;&nbsp;&nbsp;&nbsp;ResourceDictionary Source="myresourcedictionary2.xaml"/&gt;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/ResourceDictionary.MergedDictionaries&gt;
+            &nbsp;&nbsp;&nbsp;&nbsp;</b>
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;&nbsp;&nbsp;&nbsp;&nbsp;Style TargetType="Button" x:Key="localButtonStyle"&gt;
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;&nbsp;&nbsp;&nbsp;&nbsp;Setter Property="Background" Value="Yellow" /&gt;
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;&nbsp;&nbsp;&nbsp;&nbsp;/Style&gt;
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;/ResourceDictionary&gt;
+            &lt;/Window.Resources&gt;
+            &lt;StackPanel&gt;
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;Button <b>Style="{StaticResource localButtonStyle}"</b>&gt;abc&lt;/Button&gt;
+            &lt;/StackPanel&gt;
+        </div>
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: What namespaces are needed for WPF application?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        If you want to create WPF application following 4 are required references:
+        <b>System.Xaml</b>: Provides types that relate to XAML readers and XAML writers.
+        <b>WindowsBase</b>: Defines the base infrastructure of WPF, including dependency properties support.
+        <b>PresentationCore</b>: This assembly defines types that constitute the foundation of the WPF GUI layer.
+        <b>PresentationFoundation</b>: This assembly—defines the WPF controls types, animation and multimedia support, data binding support, and other WPF services.
+    </div>
+</details>
+
+<details>
+    <summary><strong style="color:#ff0000;">Q: What is BAML?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        Binary Application Markup Language is nothing but XAML that has been tokenized, parsed and changed into binary form. BAML is compressed declarative language, which gets loaded and parsed quicker than XAML.
+    </div>
+</details>
+
+<details>
+    <summary><strong style="color:#ff0000;">Q: Difference between User Control vs Custom Control?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        <b>User Control:</b>
+        <ul>
+            <li>Consists of XAML and code behind file both</li>
+            <li>Do not supports theming</li>
+            <li>No control template and very difficult to style</li>
+            <li>Cannot share across applications</li>
+        </ul>
+        <b>Custom Control</b>: 
+        <ul>
+            <li>Consists of code file and a default style in Themes/Generic.xaml</li>
+            <li>Can be styled and template</li>
+        </ul>
+
+        You need to choose right base class from UIElement:
+        <ul>
+            <li>FrameworkElement (support styling, tooltip or databinding)</li>
+            <li>Control (with template support)</li>
+            <li>ContentControl (content property like button)</li>
+            <li>HeaderedContentControl (content with header like group box, expander)</li>
+            <li>ItemsContrl (for dynamic list)</li>
+            <li>Selector (like ItemControl but support selection)</li>
+            <li>RangeBase (display range like slider or progress bars)</li>
+        </ul>
+        ...or derive from any existing control.
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: How can you improve WPF application performance?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;">
+        <ul>
+            <li><b>Fix Binding Errors :</b> For every binding error, your app hangs for few milliseconds and write error to the trace log.</li>
+            <li><b>Avoid DynamicResources :</b> DynamicResource are always slower than StaticResource.</li>
+            <li><b>Avoid ResourceDictionary :</b> There is always a huge cost in constructing ResourceDictionary.</li>
+            <li><b>Simplify your Visual Tree :</b> Shallow visual tree are better than deeper visual tree.</li>
+            <li><b>Check for Lower end machine :</b> WPF app tends to be slow on machines without graphic acceleration devices.</li>
+            <li><b>Beware of memory leaks :</b> Developers restarts application during development but client uses it continuously.</li>
+            <li><b> Lower the bitmap scaling mode :</b> &lt;Image RenderOptions.BitmapScalingMode=&quot;LowQuality&quot;...</li>
+            <li><b>Use UI Virtualization to display large data :</b>&lt;ComboBox VirtualizingStackPanel.IsVirtualizing=&quot;True&quot;...generate only subset of UI elements those who are visible on screen.</li>
+            <li><b>Use Deferred Scrolling :</b> &lt;ListBox ScrollViewer.IsDeferredScrollingEnabled=&quot;True&quot;... not to scroll the content until user release continues scrolling action for large data.</li>
+            <li><b>Use Font Cache Service :</b> WPF font cache service shares font data between WPF applications.</li>
+            <li><b>Unload unnecessary Animations :</b> You should dispose animation when object they animate is no longer being used. &lt;EventTrigger <b>RoutedEvent="Page.Unloaded"</b> &gt;</li>
+            <li><b>Use WPF Profiling :</b> Profiling tools enables you to analyze the run-time behavior and determine performance optimizations that can apply. Example Snoop, WPFPref, Perforator, Visual Profiler etc.</li>
+        </ul>
+    </div>
+</details>
+<i><span style="float:right;font-weight:bold;color:lightgreen;">- Akash Deep Sharma</span></i>

@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script>
+        //setTimeout(function () {
+        //    window.location.reload(1);
+        //}, 1000);
+    </script>
+</head>
+<body>
+    <b>Connected System:</b> An application deployed across multiple machines with strong  emphasis on communication protocols (also known as 'distributed applications' in past).<br />
+    <details>
+        <summary><span style="background-color:lightgreen;font-weight:bolder;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>Introduction to WCF</u>&nbsp;&nbsp;&nbsp;</span></summary>
+        <div style="border:1px solid lightgreen; margin:10px;padding:10px;">
+            In past Microsoft provided varoius communication framework for commnication stystem.<br />
+            <ol>
+                <li><b>DCOM/COM+/ES:</b> Very component oriented approach; One key feature was distributed transactions. Require to have DCOM infrastructure available on every machine.</li>
+                <li><b>.NET Remoting:</b> Very similar to DCOM; but it was for managed code and runs in .NET CLR. Require .NET Framework to be available on machine.</li>
+                <li><b>MSMQ:</b> It was focused on messaging. Allows to take a message and transmit it between machines in asyncronous relible fashion. Require MSMQ infrastructure on allmachine.</li>
+            </ol>
+            Now we have 2 problems:<br />
+            a) Problem with these approach that they come with their own programming model. Meaning one code style is totally diffrent from another and each require an infrastructure which is available on window only.<br />
+            b) They are not interoperatable. Meaning we need technology freedom during communication.<br /><br />
+            <b>Services:</b> functionality expose via messaging. Interop achieved via 'standard protocols' and 'message formats'. <u>Standard Protocol</u> like http and <u>Message Formats</u> like JSON or XML (custom format or stndar format SOAP, RSS}).<br />
+            <h3>Service design philosophies</h3>
+            <b>SOAP (Simple Object Access Protocol):</b> XML messaging using SOAP as the format, enhanced with WS-* protocols, can be used with any transport protocol.<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="background-color:lightcyan">SOAP can be implemented in transport neutral way and uses SOAP (XML based) as messaging system. SOAP is a particular xml vocabulary for packaging messages that need to be transmited to/from services.</span><br />
+            <b>REST (REpresentational State Transfer):</b> Desgin paradigm focused on how to identify, represent, and operate on resources through a unified interface (HTTP)<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="background-color:lightcyan">REST only embrace HTTP and are modeled resources with URI's. Can be represent XML, RSS, JSON etc. Uses HTTP methods like POST, GET, DELETE etc.</span><br /><br />
+            So both philosophies are considered as <b>SOA(Service Oriented Architecture)</b> a genral design paradigm focsued on a seperation of concern.<br /><br />
+            <b>Web Services:</b> This was the first attempt of Microsoft to provide SOA. Build top on HTTP and TCP and provide simple support for SOAP (XML). Web services didn't provide much support for transport nutrality and RESTful services.<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="background-color:lightcyan">Microsoft realised that 'Unified Model' is required for all communication logic to cover wide varity of senarios. Design sould support various Design Options (SOAP, REST etc), Transport Protocols (HTTP, TCP, MSMQ etc.), Message format (XML, JSON, binary etc) or Messsage Protocols. Also provide flexibility via extensibility (for custom transport or message format).</span><br /><br />
+            <b>WCF (Windows Communicatoin Foudation):</b> New unified 'communication' framework. It takes all the best ideas from existing communication framework and unified them in one logica model. [assembly: System.ServiceModel.dll]<br /><br />
+            In WCF we just have one way to write code Classes (Message that we send for service operation), and Interface (Define set of Operation) by decorating them with Attributes (DataContract-DataMember and ServiceContract-OperationContract).&nbsp;&nbsp;&nbsp;&nbsp;<span style="background-color:lightcyan">Then implement Contract Interface in a Class to put all the business logic.</span>&nbsp;&nbsp;&nbsp;&nbsp;  How to connect by <b>endpoints</b> that define communication option with address, contract and binding.<br />
+            <details>
+                <summary>WCF Service Example</summary>
+                <div style="border:1px solid black; margin:15px;padding:15px;">
+                    <div style="background-color:lightgray">using System.Runtime.Serialization;</div>
+                    <div style="background-color:lightgoldenrodyellow">using System.ServiceModel;</div>
+                    <div style="background-color:lightgray">.</div>
+                    <div style="background-color:lightgoldenrodyellow">namespace HelloWorldService</div>
+                    <div style="background-color:lightgray">{</div>
+                    <div style="background-color:lightgoldenrodyellow">&nbsp;&nbsp;&nbsp;&nbsp;[DataContract]</div>
+                    <div style="background-color:lightgray">&nbsp;&nbsp;&nbsp;&nbsp;public class Name</div>
+                    <div style="background-color:lightgoldenrodyellow">&nbsp;&nbsp;&nbsp;&nbsp;{</div>
+                    <div style="background-color:lightgray">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[DataMember]</div>
+                    <div style="background-color:lightgoldenrodyellow">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public string First;</div>
+                    <div style="background-color:lightgray">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[DataMember]</div>
+                    <div style="background-color:lightgoldenrodyellow">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public string Last;</div>
+                    <div style="background-color:lightgray">&nbsp;&nbsp;&nbsp;&nbsp;}</div>
+                    <div style="background-color:lightgoldenrodyellow">.</div>
+                    <div style="background-color:lightgray">&nbsp;&nbsp;&nbsp;&nbsp;[ServiceContract]</div>
+                    <div style="background-color:lightgoldenrodyellow">&nbsp;&nbsp;&nbsp;&nbsp;public interface IHelloWorld</div>
+                    <div style="background-color:lightgray">&nbsp;&nbsp;&nbsp;&nbsp;{</div>
+                    <div style="background-color:lightgoldenrodyellow">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[OperationContract]</div>
+                    <div style="background-color:lightgray">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string SayHello(Name person);</div>
+                    <div style="background-color:lightgoldenrodyellow">&nbsp;&nbsp;&nbsp;&nbsp;}</div>
+                    <div style="background-color:lightgray">.</div>
+                    <div style="background-color:lightgoldenrodyellow">&nbsp;&nbsp;&nbsp;&nbsp;public class HelloWorldService : IHelloWorld</div>
+                    <div style="background-color:lightgray">&nbsp;&nbsp;&nbsp;&nbsp;{</div>
+                    <div style="background-color:lightgoldenrodyellow">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public string SayHello(Name person)</div>
+                    <div style="background-color:lightgray">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</div>
+                    <div style="background-color:lightgoldenrodyellow">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return string.Format("Hello {0} {1}", person.First, person.Last);</div>
+                    <div style="background-color:lightgray">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div>
+                    <div style="background-color:lightgoldenrodyellow">&nbsp;&nbsp;&nbsp;&nbsp;}</div>
+                    <div style="background-color:lightgray">}</div>
+                </div>
+            </details>
+        </div>       
+    </details>
+</body>
+</html>

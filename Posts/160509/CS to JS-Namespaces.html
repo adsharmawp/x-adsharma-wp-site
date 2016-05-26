@@ -1,0 +1,53 @@
+﻿How to avoid polluting the global namespace in JavaScript?
+<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:x-large;padding:3px;">&nbsp;<u>IIFI</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        When we work with large projects, and if we simply write our code in simple .js file we may end up creating lot of variables on global scope. Same function name or variable name can override each other.
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            var appName = "demoApp";
+            var appTime = new Date();
+
+            function printAppInfo() {
+            &nbsp;&nbsp;&nbsp;&nbsp;return appName + " : " + appTime;
+            }
+
+            document.write(printAppInfo());
+        </div>
+        So we can use IIFI (Immediately invoked function implementation) or in C# term anonymous self executing function to protect polluting global namespace.
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            (function () {
+            &nbsp;&nbsp;&nbsp;&nbsp;var appName = "demoApp";
+            &nbsp;&nbsp;&nbsp;&nbsp;var appTime = new Date();
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;function printAppInfo() {
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return appName + " : " + appTime;
+            &nbsp;&nbsp;&nbsp;&nbsp;}
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;document.write(printAppInfo());
+            })();
+        </div>
+    </div>
+</details>
+<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:x-large;padding:3px;">&nbsp;<u>Mimic Namespace</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        In above exaple we have problem that we can not call 'printAppInfo' from outside...
+        As JavaScript doesn't have any concept like namespace but we can mimic that by using variables.
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            var myOrg = myOrg || {}; // Main Namespace
+            // If myOrg exists return it or create new one
+
+            (function (ns) {
+            &nbsp;&nbsp;&nbsp;&nbsp;var appName = "demoApp";
+            &nbsp;&nbsp;&nbsp;&nbsp;var appTime = new Date();
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;ns.printAppInfo = function() {
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return appName + " : " + appTime;
+            &nbsp;&nbsp;&nbsp;&nbsp;}
+            })(myOrg.myLogic = myOrg.myLogic || {}); // Sub Namespace
+
+            document.write(myOrg.myLogic.printAppInfo());
+        </div>
+    </div>
+</details>
+<i><span style="float:right;font-weight:bold;color:#0066CC;">- Akash Deep Sharma</span></i>

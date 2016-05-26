@@ -1,0 +1,19 @@
+﻿<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:x-large;padding:3px;">&nbsp;<u>Model-View-Whatever</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid lightgreen;padding:5px;">
+        Model-View-Whatever is a term used to indicate the capability of the framework being used to give the option to choose from MVC or MVVM approaches. Like in Angular.js. Angular gives the facility of structuring the code in whatever way the developer prefers- MVC (more separation of view and logic) or MVVM (model reads the changes in view by itself and gets updated).
+        <h3>Model:</h3>
+        The Model represents a set of classes that describe the business logic i.e. business model as well as data access operations i.e. data model. It also defines business rules for data means how the data can be changed and manipulated.
+        <h3>View:</h3>
+        The View represents the UI components like Html (CSS, jQuery), WPF etc. It is only responsible for displaying the data that is received from the controller as the result. This also transforms the model(s) into UI.
+        <h3>Controller:</h3>
+        The Controller is responsible to process incoming requests. It receives input from users via the View, then process the user's data with the help of Model and passing the results back to the View. Typically, it acts as the coordinator between the View and the Model.
+        <h3>Presenter:</h3>
+        The Presenter is responsible for handling all UI events on behalf of the view. This receive input from users via the View, then process the user's data with the help of Model and passing the results back to the View. Unlike view and controller, view and presenter are completely decoupled from each other’s and communicate to each other’s by an interface.<br />
+        Also, presenter does not manage the incoming request traffic as controller.
+        <h3>View Model:</h3>
+        The View Model is responsible for exposing methods, commands, and other properties that helps to maintain the state of the view, manipulate the model as the result of actions on the view, and trigger events in the view itself.<br />
+        This pattern is commonly used by the WPF, Silverlight.
+    </div>
+</details>
+<i><span style="float:right;font-weight:bold;color:#0066CC;">- Akash Deep Sharma</span></i>

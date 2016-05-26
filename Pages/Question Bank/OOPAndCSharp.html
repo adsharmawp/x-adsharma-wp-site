@@ -1,0 +1,208 @@
+﻿<h3>Object Oriented Programming</h3>
+<details>
+    <summary><strong style="color:#ff0000;">Q: What is object-oriented paradigm (OOP)?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        This paradigm closely reflects the structure of ‘real world’ system, therefore well suited to model complex systems with complex behaviors; additionally it also increased re-usability and maintainability of source code. This paradigm views a computer program as a combination of data structure called objects.
+        <strong>Object:</strong> an instance of a class and basic unit of system.
+        <strong>Class:</strong> represents a blueprint for objects. It describes all attributes (fields) and methods (behavior) of the object.
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: What are 4 pillars of OOP?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        4 pillars are:
+        <strong>Abstraction:</strong> Exposing only the relevant and essential data to the users without showing unnecessary information.
+        <strong>Encapsulation:</strong> Mechanism of wrapping the data and code together as a single unit.
+        <strong>Inheritance:</strong> Enables new object to take the properties and behavior of an existing object.
+        <strong>Polymorphism:</strong> Ability to process a request differently based on situation. In programming there are two types of polymorphism: Compile time (Static - by method overloading) and Run time (Dynamic - by method overriding).
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: What is the difference between class and structure and how to choose suitable one?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        Structs are value type (lives in stack memory) and classes are reference type (lives in heap memory). Consider defining a struct instead of class if instances of the type are small and commonly short-lived. Struct are always faster but if you pass them in other method the whole data get copied that makes them slower (until they are small 16 bytes or less).
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: What is the d<strong>ifference stack memory and heap memory</strong>?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        We differentiate between both based on the nature of allocation. If program is loaded into memory, it is organized into three areas of memory, called segments:
+        <strong>Text Segment-</strong> where the compiled code of program itself resides.
+        <strong>Stack Segment-</strong> where the memory is allocated for variables within functions in LIFO fashion.
+        <strong>Heap Segment-</strong> where you can allocate a block at any time and free it any time. Memory allocated in the heap remains in existence for the duration of a program until GC runs.
+    </div>
+</details>
+<h3>.NET Framework</h3>
+<details>
+    <summary><strong style="color:#ff0000;">Q: What is .NET?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        A programming infrastructure created by Microsoft that allows us to develop and run application using .NET technologies. Application could be Console, Windows, Web, Services etc. Framework consists of 2 parts:
+        <strong>CLR-</strong> Common Language Runtime is an application virtual machine that manages the execution of .NET programs and provides services such as security, memory management, type safety, exception handling, thread management etc.
+        <strong>FCL-</strong> Framework Class Library is a library of classes, interfaces, and value types that provide access to system functionality.
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: What is CTS, CLS, MSIL and JIT?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        CTS and CLS, both together allows cross language communication and type safety.
+        <strong>CTS (Common Type System)-</strong> is a standard that specifies how type definitions and specific values of type are represented in computer memory (for example type 'Integer' in VB and type 'int' in C# are the same as System.Int32 in .NET Framework).
+        <strong>CLS (Common Language Specifications)-</strong> guidelines for language that runs or want to run under .NET framework.
+        <strong>MSIL (Microsoft Intermediate Language)-</strong> CPU independent set of instruction that can efficiently convert to native code. This is similar to java bytecode but not only gives us platform independence but language independence also.
+        <strong>JIT(Just-in-time Compiler)-</strong> JIT compilation converts MSIL to native code on demand at application run time.
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: What is GC (Garbage Collector)?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        Garbage Collector is an automatic memory management (manage allocation and release of memory for your application). When the garbage collector performs a collection, it checks for objects in the managed heap that are no longer being used by the application and performs the necessary operations to reclaim their memory. You can call GC.Collect() to force GC to run.
+    </div>
+</details>
+<h3>C# Programming</h3>
+<details>
+    <summary><strong style="color:#ff0000;">Q: What are C# Access Modifiers in C#?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        Access modifiers are keywords used to specify the accessibility of a member or a type.
+        <strong>Public-</strong> Access is not restricted.
+        <strong>Protected-</strong> Access is limited to the containing class or types derived from the containing class.
+        <strong>Private-</strong> Access is limited to the containing type.
+        <strong>Internal-</strong> Access is limited to the current assembly.
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: What is private constructor and static constructor?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        Constructor is a special method called to create an object. It prepares the new object for use by initializing all members.
+        <strong>Static Constructor-</strong> used to initialize any static data, or to perform a particular action (only for one time).
+        <strong>Private Constructor-</strong> to prevent object creation outside the class and to implement the singleton design pattern.
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: When a static constructor gets called?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        It is called automatically before the first instance is created or any static members are referenced.
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: Why we need singleton if we already have static class concept?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        Singleton allows access to a single created instance – that instance can be passed as a parameter to other methods, and treated as a normal object, and singleton can also implement inheritance.
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: Can we have private class in .NET C#?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        No; if we try so we'll get error message “<strong><em>Elements defined in a namespace cannot be explicitly declared as private, protected, or protected internal.” </em></strong>However we can have private class as nested.
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: Why we need nested class in our program?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        Nested class enables you to logically group classes that are used in one place, this increase the use of encapsulation and create more readable code.
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: What is the difference between partial class and partial method?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        With Partial keyword we can split the definition of class, struct or interface over two or more source file. The Partial method allows to separate method definition and implementation. These enable class designers to provide method hooks, and developer decides to implement it or not.
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: What is the difference between readonly, constant and static in C#?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        All three functions differently (however const are static by default):
+        <strong>const-</strong> a compile time constant and must be initialized at the time of declaration.
+        <strong>readonly-</strong> run time constant and can be initialized within the class constructor.
+        <strong>static-</strong> used to define field common to all objects and do not tie to specific object and can be modified at any time.
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: What are Generics in C#?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        Generics allow you to write a class or method that can work with any data type. This enforces type safety and promotes code re-usability and maintainability.
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: What are Delegates in C#?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        Delegates are type safe function pointer. Are available in 2 type: Simple and Multicast. Also give us the ability to enter in Thread Pool with BeginInvoke method. An event handler is typically implemented via a delegate which provides us the easiest way to implement observer pattern in .NET.
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: What is difference between delegate and event C#?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        Event adds a layer of abstraction and protection on the delegate. So these protections prevent client to reset or invoke event. Example events have add/remove operations instead of get/set, so client can only add or remove a method.
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: What is reflection in C#?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        Reflection is for obtaining type information at runtime. Example to inspect assemblies, types, and members.
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: What is using block and IDisposable? Why IDisposable if GC is already cleans memory?</strong></summary>
+    <div>
+        Provides a convenient syntax that ensures the correct use of <strong>IDisposable</strong> objects. <strong>Dispose</strong> method should be called to release un-managed resources, whereas GC handles managed resources only. Within the <strong>using</strong> block, the object is read-only and cannot be modified or reassigned. There could be a long chain of references. For example, if you dispose an XmlWriter it will dispose StreamWriter and it will dispose FileStream and this will release file handlers.
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: Difference between finalize, destructor and dispose?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        In C# destructor is a way to override Finalize method, they are technically same. Now <strong>destructor and dispose both are used to free unmanaged resources,</strong> but the difference is that <strong>destructor </strong>is called<strong> by GC </strong>but<strong> disposed </strong>can be called<strong> explicitly</strong> at any time. Hence there is a performance cost associated with destructor.
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: A class implementing two interfaces both have same name method how will you provide implementation?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        You can implement this in two ways, implicit and explicit. Implicit - typical implementation create a single method with same name as interfaces. [<a href="https://adsharma.wordpress.com/2016/02/25/implicit-vs-explicit-interface-implementation/">Example</a>]
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: What is LINQ (Language Integrated Query)?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        Programming model for .NET to add formal query capabilities. LINQ offers a compact, expressive and intelligible syntax for manipulating data. LINQ operators like from, where, select, etc are implemented using extension methods. [Example]
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: What is extension method?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        Extension methods are a special kind of static method, but they are called as if they were instance method on the extended type. So the extension method enables you to add methods to existing type without modify or driving it.
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2;">
+            public static class MyExtensions
+            {
+            &nbsp;&nbsp;&nbsp;&nbsp;public static string Hello(this string str)
+            &nbsp;&nbsp;&nbsp;&nbsp;{
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return "Hello " + str;
+            &nbsp;&nbsp;&nbsp;&nbsp;}
+            }
+        </div>
+        <div style="font-size:small;border:1px solid black;background-color:#fafad2; border-top:none">
+            // Use
+            string name = "Akash";
+            Console.WriteLine(name.Hello());
+        </div>
+        Output: Hello Akash
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: What are the various ways of casting?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        Implicit and Explicit casting are the ways in C#.  [Example]
+        <strong>Implicit</strong> casting automatically take place and no additional syntax/effort is required as conversion is type safe and no data will be lost.
+        <strong>Explicit</strong> requires when information might be lost during conversion for example you can assign int value to a long variable implicitly but for reverse you have to cast explicitly.
+        <strong>1)</strong> <span style="color:#0000ff;">s = (string)o;</span> <span style="color:#339966;">// Throws InvalidCastException if o is not a string. Otherwise, assigns o to s, even if o is null.</span>
+        <strong>2)</strong> <span style="color:#0000ff;">s = o as string;</span> <span style="color:#339966;">// Assigns null to s if o is not a string or if o is null.</span>
+        <strong>3)</strong> <span style="color:#0000ff;">s = o.ToString();</span> <span style="color:#339966;">// Throws NullReferenceException if o is null. Otherwise call ToString() type doesn’t matter.</span>
+    </div>
+</details>
+<details>
+    <summary><strong style="color:#ff0000;">Q: What are the various ways of type checking?</strong></summary>
+    <div style="border:1px solid lightgreen;padding:5px;text-align:justify;">
+        Sometime it requires to take decision at run time based on type of an object. Following are some ways to check type in C#:
+        <strong>typeof:</strong> takes a type name (which you specify at compile time).
+        <strong>GetType:</strong> gets the runtime type of an instance.
+        <strong>is:</strong> returns true if an instance is in the inheritance tree.
+        <strong>1)</strong><span style="color:#0000ff;">if (o.GetType() == typeof(string));</span> <span style="color:#339966;">//This will return true on <b>exact matching.</b></span>
+        <strong>2)</strong><span style="color:#0000ff;">if (o is int);</span> <span style="color:#339966;">// returns true if an instance is in the <b>inheritance tree</b></span>
+    </div>
+</details>

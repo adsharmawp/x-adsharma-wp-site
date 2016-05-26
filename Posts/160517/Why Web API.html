@@ -1,0 +1,62 @@
+﻿The .NET framework has a number of technologies that allow you to create HTTP services such as Web Service, WCF and now Web API.
+<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:x-large;padding:3px;">&nbsp;<u>Web Service</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        <ul>
+            <li>It is based on SOAP and return data in XML formt</li>
+            <li>It support only HTTP protocol</li>
+            <li>It is not open source but can be consumed by any client that understands XML</li>
+            <li>It can only be hosted on IIS</li>
+        </ul>
+        <b>Issue:</b> Only runs on HTTP and support SOAP
+    </div>
+</details>
+<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:x-large;padding:3px;">&nbsp;<u>WCF</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        <ul>
+            <li>It is also based on SOAP and return data in XML form</li>
+            <li>It support various protocols like TCP, HTTP, HTTPS, MSMQ, Named Pipes</li>
+            <li>It is also not open source but can be consumed by any client that understands XML</li>
+            <li>It can be hosted on IIS, Self or WAS</li>
+        </ul>
+        <b>Issue:</b> Required extensive configuration.
+    </div>
+</details>
+<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:x-large;padding:3px;">&nbsp;<u>WCF Rest</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        <ul>
+            <li>It support XML, JSON and ATOM data format</li>
+            <li>To use WCF as Rest, you have to enable webHttpBidings</li>
+            <li>It support GET and POST verbs by 'WebGet' and 'WebInvoke' attributes</li>
+            <li>To enable other HTTP verbs, configuration in IIS required</li>
+            <li>The UriTemplate must specified for parameters in WebGet</li>
+        </ul>
+        <b>Issue:</b> To enable Rest again lot of configuration and additional steps required.
+    </div>
+</details>
+<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:x-large;padding:3px;">&nbsp;<u>ASP.NET MVC</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        We can extend controller to return data in JSOn format and can accept GET, PUT, DELETE and other verbs of HTTP.<br />
+        This is become difficult because we try to match the name of verb inside action method. Sometime ends with collision same method one for GET, one for PUT etc.<br />
+        Nee to add every level...but in Web API verbs are directly mapped to method.
+    </div>
+</details>
+<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:x-large;padding:3px;">&nbsp;<u>Web API</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        New framework for building HTTP service in simple and easy way.
+        <ul>
+            <li>Response are formatted by Web API's MediaTypeFormatter in JSON, XML or whatever you want...</li>
+            <li>It is full features of HTTP</li>
+            <li>It is open source and ideal for RESTful services on .NET</li>
+            <li>Can be hosted with in application or IIS</li>
+            <li>Light weight and good for limited bandwidth devices like smart phones</li>
+            <li>It also supports MVC features such as routing, controllers, action results, filter, model binders etc.</li>
+        </ul>
+        <b>Note:</b> Go for WCF if you want to create a service that can use fast transport when available.
+    </div>
+</details>
+<i><span style="float:right;font-weight:bold;color:#0066CC;">- Akash Deep Sharma</span></i>

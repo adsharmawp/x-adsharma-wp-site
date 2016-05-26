@@ -1,0 +1,18 @@
+﻿On 16th May 2016 Microsoft announce the availability of ASP.NET Core RC2.
+<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:x-large;padding:3px;">&nbsp;<u>ASP.NET Core</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        This release features the rebranding of ASP.NET 5 to ASP.NET core. This renaming was made in order to clarify that this is a new framework build from the ground up and not a revision of the existing ASP.NET framework.
+
+        <b>CLI (Command line interface):</b> The key changed occured between RC1 and RC2 is the introduction of the .NET command line interface. This tool replaces the dnvm, dnx and dnu utilities with a single tool that handles the responsiblities of those tools i.e. 'dotnet'.
+
+        <b>ASP.NET Core is a console app:</b> In RC1 an ASP.NET application was a class library that contained a Startup.cs class. When the DNX toolchain run your application ASP.NET hosting libraries would find an execute Startup.cs, booting your web application.
+        In RC2 an ASP.NET Core application is a .NET Core Console application that calls into ASP.NET specific libraries. What that means for ASP.NET Core apps in the code that used to live in ASP.NET Hosting libraies and automatically run your startup.cs now lives inside a Program.cs.
+        This alignment means that a single .NET toolchain can be used for both .NET Cpre Console applications and ASP.NET Core applications.
+
+        <b>IIS Support Baked In:</b> Use the new ASP.NET Core Module in your web.config (it's back) to configure IIS to launch and host your application.
+
+        There are a number of other changes that occured in order to clear up, fix or simplify APIs.
+    </div>
+</details>
+<i><span style="float:right;font-weight:bold;color:#0066CC;">- Akash Deep Sharma</span></i>
