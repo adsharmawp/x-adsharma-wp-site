@@ -1,0 +1,62 @@
+﻿SOLID are five basic principle of object-oriented programming and design.
+<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:large;padding:3px;">&nbsp;<u>SRP</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        <b><u>Single Responsibility Principle</u></b>:
+        <h6 style="background-color:azure">SRP states that every object should have a single responsibility, and that responsibility should be entirely encapsulated by the class.</h6>
+        <ul>
+            <li>There should never be more than one reason for a class to change.</li>
+            <li>Responsibility?  ="a reason to change"</li>
+            <li>Multiple small interfaces (follow ISP) can help to achieve SRP.</li>
+        </ul>
+    </div>
+</details>
+<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:large;padding:3px;">&nbsp;<u>OCP</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        <b><u>Open Closed Principle</u></b>:
+        <h6 style="background-color:azure">OCP states that software entities (class, module, functions etc.) should be open for extension, but closed for modification.</h6>
+        <ul>
+            <li><b>Open to Extension: </b>New behavior can be added in the future.</li>
+            <li><b>Closed to Modification: </b>Changes to source or binary code are not required.</li>
+            <li>How to change or add new behavior? <b>Key is to rely on abstractions (interfaces, abstract base classes).</b></li>
+            <li>Strategy Pattern is a best example of OCP.</li>
+            <li><b>When to apply?</b> If the module changes once, accept it. If it changes second time, refactor to achieve OCP.</li>
+        </ul>
+    </div>
+</details>
+<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:large;padding:3px;">&nbsp;<u>LSP</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        <b>Liskov Substitution Principle</b>:
+        <h6 style="background-color:azure">LSP states that subtypes must be substitutional for their base type.</h6>
+        <ul>
+            <li>IS-A should be replaced with IS-SUBSTITUTABLE-FOR.</li>
+            <li>In general calling code should not know the diffrence wheather they are calling base class or child class</li>
+        </ul>
+    </div>
+</details>
+<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:large;padding:3px;">&nbsp;<u>ISP</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        <b>Interface Segregation Principle</b>: <br />
+        <h6 style="background-color:azure">ISP states that client should not be forced to depend on method they do not use.</h6>
+        <ul>
+            <li>Many client-specific interfaces are better than one general-purpose interface.</li>
+            <li>Keep interfaces lean and focused.</li>
+            <li>Example: Facade Pattern...lets take you only what you need rather than consuming a complex class.</li>
+        </ul>
+    </div>
+</details>
+<details style="margin-bottom:10px;">
+    <summary><span style="background-color:#FFFFFF;font-size:large;padding:3px;">&nbsp;<u>DIP</u>&nbsp;&nbsp;&nbsp;</span></summary>
+    <div style="border:1px solid #EFEFEF;padding:5px;">
+        <b>Dependency Inversion Principle</b>: <br />
+        <h6 style="background-color:azure">DIP states that High-level modules should not depend on low-level modules. Both should be depend on abstractions.</h6>
+        <ul>
+            <li>use of a Dependency Injection framework.</li>
+            <li>Declare class dependencies explicitly in their constructors... and inject them.</li>
+        </ul>
+    </div>
+</details>
+<i><span style="float:right;font-weight:bold;color:#0066CC;">- Akash Deep Sharma</span></i>
